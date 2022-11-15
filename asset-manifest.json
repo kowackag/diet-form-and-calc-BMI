@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.js": "/diet-form-and-calc-BMI/static/js/main.d68eb5ba.js",
+    "static/media/roboto-italic-webfont.woff": "/diet-form-and-calc-BMI/static/media/roboto-italic-webfont.84532ede5f228ae4df72.woff",
+    "static/media/roboto-bold-webfont.woff": "/diet-form-and-calc-BMI/static/media/roboto-bold-webfont.31b59c146ec4d81e94a6.woff",
+    "static/media/roboto-regular-webfont.woff": "/diet-form-and-calc-BMI/static/media/roboto-regular-webfont.b82c69c950223fa3821d.woff",
+    "static/media/roboto-italic-webfont.woff2": "/diet-form-and-calc-BMI/static/media/roboto-italic-webfont.919d038d0cd4739a41df.woff2",
+    "static/media/roboto-bold-webfont.woff2": "/diet-form-and-calc-BMI/static/media/roboto-bold-webfont.3d93988118aec8f6dfd0.woff2",
+    "static/media/roboto-regular-webfont.woff2": "/diet-form-and-calc-BMI/static/media/roboto-regular-webfont.910700cf20941a228faf.woff2",
+    "index.html": "/diet-form-and-calc-BMI/index.html",
+    "main.d68eb5ba.js.map": "/diet-form-and-calc-BMI/static/js/main.d68eb5ba.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.d68eb5ba.js"
+  ]
+}
