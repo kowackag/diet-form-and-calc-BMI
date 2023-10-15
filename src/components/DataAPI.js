@@ -1,7 +1,7 @@
-const DataAPI = () => {
-  const url = "http://my-json-server.typicode.com/kowackag/db-diet-form";
 
-  function addOrdersAPI(data) {
+  const url = "http://localhost:3000";
+
+  export function addOrdersAPI(data) {
     const options = {
       method: "POST",
       body: JSON.stringify(data),
@@ -12,7 +12,7 @@ const DataAPI = () => {
     return _fetch(options, `/orders`);
   }
 
-  function loadProductsAPI() {
+  export function loadProductsAPI() {
     const options = {
       method: "GET",
       headers: {
@@ -31,8 +31,3 @@ const DataAPI = () => {
       return Promise.reject(resp);
     });
   }
-
-  return [addOrdersAPI, loadProductsAPI];
-};
-
-export default DataAPI;

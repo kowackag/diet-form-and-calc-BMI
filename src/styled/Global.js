@@ -1,4 +1,4 @@
-import {createGlobalStyle} from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 import robotoRegularWoff from "./../fonts/roboto-regular-webfont.woff";
 import robotoRegularWoff2 from "./../fonts/roboto-regular-webfont.woff2";
 import robotoBoldWoff from "./../fonts/roboto-bold-webfont.woff";
@@ -8,11 +8,11 @@ import robotoItalicWoff from "./../fonts/roboto-italic-webfont.woff";
 
 const GlobbalStyle = createGlobalStyle`
     :root {
-        --color-alfa: ${props=>props.theme.colorBgc};
-        --color-beta: ${props=>props.theme.colorShadowDark};
-        --color-gamma: ${props=>props.theme.colorShadowLight};
-        --color-font: ${props=>props.theme.colorFont};
-        --color-contrast:${props=>props.theme.colorContrast};
+        --color-alfa: ${(props) => props.theme.colorBgc};
+        --color-beta: ${(props) => props.theme.colorShadowDark};
+        --color-gamma: ${(props) => props.theme.colorShadowLight};
+        --color-font: ${(props) => props.theme.colorFont};
+        --color-contrast:${(props) => props.theme.colorContrast};
     }
 
     @font-face {
@@ -49,6 +49,5 @@ const GlobbalStyle = createGlobalStyle`
         line-height:1.5;
     }
 
-`
-
+`;
 export default GlobbalStyle;
