@@ -20,7 +20,7 @@ import { StyledSecondStage, Form } from "./SecondStage.styled";
 export const SecondStage = () => {
   const { orderData, dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
-
+  console.log(orderData);
   const [err, setErr] = useState(null);
   const { goal, targetWeight } = orderData;
 
@@ -61,7 +61,7 @@ export const SecondStage = () => {
         <FlexContainer>
           <Container width="45%">
             <Subtitle>Cel diety:</Subtitle>
-            {fields.map(({ name, value, desc }) => (
+            {/* {fields.map(({ name, value, desc }) => (
               <Radio
                 key={value}
                 active={goal === value}
@@ -71,8 +71,8 @@ export const SecondStage = () => {
               >
                 <p>{desc}</p>
               </Radio>
-            ))}
-            {err?.goal && <Error err={err.goal} />}
+            ))} */}
+            {/* {err?.goal && <Error err={err.goal} />}
             {goal !== "stable" && (
               <>
                 <Label htmlFor="targetWeight">Docelowa masa ciała</Label>
@@ -86,7 +86,7 @@ export const SecondStage = () => {
                 />
                 {err?.targetWeight && <Error err={err.targetWeight} />}
               </>
-            )}
+            )} */}
           </Container>
           <BMI bmi={orderData.bmi} />
         </FlexContainer>

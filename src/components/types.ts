@@ -2,7 +2,7 @@ export type OrderDataTypes = {
   gender: string;
   weight: number;
   height: number;
-  born: string;
+  born: Date;
   activity: string;
   goal: string;
   targetWeight: number;

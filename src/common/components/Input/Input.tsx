@@ -7,7 +7,7 @@ interface InputProps {
   id: string;
   type: string;
   unit?: string;
-  value: string | number;
+  value: string | number | Date;
   title?: string;
   name: "weight" | "height" | "born";
   onChange: React.ChangeEventHandler<HTMLInputElement>;

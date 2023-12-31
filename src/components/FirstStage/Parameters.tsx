@@ -12,7 +12,7 @@ interface FieldsType {
   type: string;
   unit?: string;
   name: "weight" | "height" | "born";
-  value: number | string;
+  value: number | string | Date;
   err: string;
 }
 

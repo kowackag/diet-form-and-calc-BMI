@@ -36,47 +36,12 @@ export const FirstStage = () => {
 
     if (formIsValid) {
       const bmi = countBMI(data.weight, data.height);
-      dispatch({ type: "setBMI", element: bmi });
-      // navigate("/diet-form-and-calc-BMI/2");
+      console.log(data);
+      const copyData = { ...data, bmi };
+      dispatch({ type: "setFirstStageData", element: copyData });
+      navigate("/diet-form-and-calc-BMI/2");
     }
   });
-
-  // const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-
-  //   const data = {
-  //     weight: orderData.weight,
-  //     height: orderData.height,
-  //     gender: orderData.gender,
-  //     born: orderData.born,
-  //     activity: orderData.activity,
-  //   };
-
-  //   const errors = validateDataFirstStage(data);
-  //   setErr({ ...errors });
-
-  //   if (Object.keys(errors).length === 0) {
-  //     const { weight, height } = data;
-  //     const bmi = countBMI(weight, height);
-  //     dispatch({ type: "setBMI", element: bmi });
-  //     // navigate("/diet-form-and-calc-BMI/2");
-  //   }
-  // };
-
-  // const validateForm = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-
-  //   const data = {
-  //     weight: orderData.weight,
-  //     height: orderData.height,
-  //     gender: orderData.gender,
-  //     born: orderData.born,
-  //     activity: orderData.activity,
-  //   };
-
-  //   const errors = validateDataFirstStage(data);
-  //   setErr({ ...errors });
-  // };
 
   return (
     <div>
