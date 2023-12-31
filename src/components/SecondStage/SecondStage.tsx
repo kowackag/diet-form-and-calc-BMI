@@ -7,11 +7,11 @@ import { Label } from "common/components/Label/Label";
 import { Radio } from "common/components/Radio/Radio";
 import { Error } from "common/components/Error/Error";
 import { Container } from "common/components/Container/Container.styled";
-import Subtitle from "../Subtitle/Subtitle";
-import Box from "../Box/Box";
-import { ButtonBox } from "../ButtonBox/ButtonBox";
-import BMI from "./BMI/BMI";
+import { Subtitle } from "common/components/Subtitle/Subtitle";
+import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
+import { ButtonBox } from "components/ButtonBox/ButtonBox";
 
+import BMI from "./BMI/BMI";
 import { validateDataSecondStage } from "components/validateData";
 import { OrderDataContext } from "components/context";
 
@@ -30,7 +30,7 @@ export const SecondStage = () => {
       | React.ChangeEvent<HTMLInputElement>
   ) => {
     e.preventDefault();
-    dispatch({ type: "change", element: e.target });
+    dispatch({ type: "change", element: e.target as HTMLInputElement });
   };
 
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,7 +58,7 @@ export const SecondStage = () => {
   return (
     <StyledSecondStage>
       <Form onSubmit={handleForm}>
-        <Box>
+        <FlexContainer>
           <Container width="45%">
             <Subtitle>Cel diety:</Subtitle>
             {fields.map(({ name, value, desc }) => (
@@ -89,9 +89,10 @@ export const SecondStage = () => {
             )}
           </Container>
           <BMI bmi={orderData.bmi} />
-        </Box>
+        </FlexContainer>
         <ButtonBox>
           <Button
+            variant="secondary"
             onClick={() => navigate("/diet-form-and-calc-BMI/1")}
             type="button"
           >

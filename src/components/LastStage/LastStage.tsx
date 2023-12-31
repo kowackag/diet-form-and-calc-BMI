@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Subtitle from "../Subtitle/Subtitle";
-import { ButtonBox } from "../ButtonBox/ButtonBox";
+import { Subtitle } from "common/components/Subtitle/Subtitle";
+import { ButtonBox } from "components/ButtonBox/ButtonBox";
 import { Button } from "common/components/Button/Button";
 import { Input } from "common/components/Input/Input";
 import { Label } from "common/components/Label/Label";
@@ -13,6 +13,7 @@ import { OrderDataContext } from "components/context";
 
 const LastStage = () => {
   const { orderData, dispatch } = useContext(OrderDataContext);
+
   const { personalData } = orderData;
   const navigate = useNavigate();
   const [err, setErr] = useState(null);
@@ -23,7 +24,7 @@ const LastStage = () => {
       | React.ChangeEvent<HTMLInputElement>
   ) => {
     e.preventDefault();
-    dispatch({ type: "change", element: e.target });
+    dispatch({ type: "change", element: e.target as HTMLInputElement });
   };
 
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
@@ -80,7 +81,7 @@ const LastStage = () => {
   return (
     <div>
       <Subtitle>Proszę o podanie danych kontaktowych.</Subtitle>
-      <form className="form" onSubmit={handleForm}>
+      <form onSubmit={handleForm}>
         <div>
           {fields.map(({ label, name, type, value, err, key }) => (
             <React.Fragment key={key}>
@@ -90,7 +91,7 @@ const LastStage = () => {
                 id={key}
                 name={name}
                 value={value}
-                // title={key}
+                title={key}
                 onChange={changeValue}
               />
               {err && <Error err={err} />}

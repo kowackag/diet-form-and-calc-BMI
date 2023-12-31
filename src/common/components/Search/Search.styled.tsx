@@ -5,7 +5,7 @@ export const StyledSearch = styled.div`
   position: relative;
 `;
 
-export const SearchInput = styled.input`
+export const SearchInput = styled.select`
   position: relative;
   display: inline-block;
   padding: 1rem 1rem;
@@ -17,7 +17,7 @@ export const SearchInput = styled.input`
   color: rgb(var(--color-font));
   color: rgba(var(--color-font), 0.8);
   font-size: 1.4rem;
-  border-radius: 0.8rem;
+  border-radius: 4px;
   box-shadow: inset 4px 4px 6px rgb(var(--color-beta)),
     inset -4px -4px 6px rgb(var(--color-gamma));
   background-color: rgb(var(--color-alfa));
@@ -36,10 +36,11 @@ export const Label = styled.label`
   }
 `;
 
-export const ListItem = styled.li<{
-  name: string;
+export const ListItem = styled.option<{
+  value: string;
 }>`
-  padding: 0.4rem;
+  display: inline-block;
+  padding: 2rem;
   border-bottom: 1px solid rgb(var(--color-beta));
   cursor: pointer;
 `;

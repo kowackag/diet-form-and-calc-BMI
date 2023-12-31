@@ -9,7 +9,6 @@ import Complete from "./Complete/Complete";
 import ProgressBar from "./ProgresBar/ProgressBar";
 //import { addOrdersAPI } from "./DataAPI";
 
-// import { OrderDataTypes } from "./types";
 import { OrderDataContext } from "./context";
 import { useHandler } from "./reducer";
 
@@ -17,8 +16,8 @@ import { Wrapper, Title } from "./App.styled";
 
 const App = () => {
   const [orderData, dispatch] = useHandler();
-  const [stage, setStage] = useState(1);
-  
+  const [stage] = useState(1);
+
   const getProgress = (stage: number) => {
     const progress = 25 * (stage - 1);
     return progress;

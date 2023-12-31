@@ -1,65 +1,57 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
-import Subtitle from "../Subtitle/Subtitle";
-import { Radio} from "common/components/Radio/Radio";
+import { Subtitle } from "common/components/Subtitle/Subtitle";
+import { Radio } from "common/components/Radio/Radio";
 import { RadioInfo } from "common/components/Radio/Radio.styled";
 import { Error } from "common/components/Error/Error";
-import { Container } from "common/components/Container/Container.styled";
+import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
 
-import { OrderDataContext } from "components/context";
 import { Text } from "common/components/Text/Text.styled";
 
-export const Activity = ({ activity, error }) => {
-  const { dispatch } = useContext(OrderDataContext);
-
+export const Activity = ({ error, register }) => {
+  const [activity, setActivity] = useState("");
   const fields = [
     {
-      name: "activity",
       value: "none",
       label: "Brak aktywności",
       desc: "Siedzący tryb życia",
     },
     {
-      name: "activity",
       value: "low",
       label: "Mała aktywność",
       desc: "Sporadyczne treningi",
     },
     {
-      name: "activity",
       value: "med",
       label: "Średnia aktywność",
       desc: "1-3 treningi w tygodniu",
     },
     {
-      name: "activity",
       value: "hight",
       label: "Duża aktywność",
       desc: "Conajmniej 4 treningi w tygodniu",
     },
   ];
 
-  const changeValue = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-    e.preventDefault();
-    dispatch({ type: "change", element: e.target });
-  };
-
   return (
-    <Container width="45%">
+    <FlexContainer width="45%" direction="column">
       <Subtitle>Jaka jest twoja aktywność fizyczna?</Subtitle>
-      {fields.map(({ name, value, label, desc }) => (
+      {fields.map(({ value, label, desc }) => (
         <Radio
+          register={register}
           key={value}
-          name={name}
+          name="activity"
           value={value}
-          onClick={changeValue}
+          onClick={() => setActivity(value)}
           active={value === activity}
         >
-          <Text weight="bold"> {label}</Text>
+          <Text weight="500" mb="6px">
+            {label}
+          </Text>
           <RadioInfo>{desc}</RadioInfo>
         </Radio>
       ))}
       <Error err={error} />
-    </Container>
+    </FlexContainer>
   );
 };

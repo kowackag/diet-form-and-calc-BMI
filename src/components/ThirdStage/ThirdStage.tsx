@@ -7,9 +7,9 @@ import { ButtonBox } from "../ButtonBox/ButtonBox";
 import { Button } from "common/components/Button/Button";
 import { Label } from "common/components/Label/Label";
 import { Error } from "common/components/Error/Error";
-import Search from "../Search/Search";
+import { Search } from "../../common/components/Search/Search";
 import Checkbox from "../Checkbox/Checkbox";
-import Subtitle from "../Subtitle/Subtitle";
+import { Subtitle } from "common/components/Subtitle/Subtitle";
 //import { loadProductsAPI } from "../DataAPI";
 
 import { validateDataThirdStage } from "components/validateData";
@@ -40,7 +40,7 @@ export const ThirdStage = () => {
 
   const changeValue = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     e.preventDefault();
-    dispatch({ type: "change", element: e.target });
+    dispatch({ type: "change", element: e.target as HTMLInputElement });
   };
 
   const chooseElement = (e: React.ChangeEvent<HTMLInputElement>) => {

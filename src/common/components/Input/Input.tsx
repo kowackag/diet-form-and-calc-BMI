@@ -1,37 +1,35 @@
 import React from "react";
 import { StyledInput, Unit, InputContainer } from "./Input.styled";
-
+import { UseFormRegister } from "react-hook-form";
+import { DataFirstStageTypes } from "components/types";
 interface InputProps {
+  register: UseFormRegister<DataFirstStageTypes>;
   id: string;
   type: string;
   unit?: string;
   value: string | number;
-  name: string;
-  readonly?: boolean;
-  onFocus?: () => void;
-  onBlur?: () => void;
+  title?: string;
+  name: "weight" | "height" | "born";
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  //title: string;
 }
 
 export const Input = ({
   id,
   type,
   unit,
-  value,
   name,
-  onChange,
+  register,
+  title,
 }: InputProps) => {
   return (
     <InputContainer>
       <StyledInput
+        {...register(name)}
         unit={unit}
         id={id}
         type={type}
         name={name}
-        //title={title}
-        value={value}
-        onChange={onChange}
+        title={title}
       />
       {unit ? <Unit>{unit}</Unit> : null}
     </InputContainer>

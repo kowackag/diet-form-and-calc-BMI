@@ -11,11 +11,11 @@ export const StyledRadio = styled.label<{
 }>`
   display: inline-block;
   width: 100%;
-  margin-bottom: 2rem;
+  margin-top: 2rem;
   position: relative;
   padding: 1rem 1rem;
   cursor: pointer;
-  border-radius: 0.8rem;
+  border-radius: 4px;
   box-shadow: 6px 6px 10px rgb(var(--color-beta)),
     -6px -6px 8px rgb(var(--color-gamma));
   background-color: rgb(var(--color-alfa));
@@ -49,4 +49,3 @@ export const StyledRadio = styled.label<{
     display: none;
   }
 `;
-

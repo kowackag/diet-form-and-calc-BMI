@@ -1,10 +1,21 @@
 import React from "react";
 import { OrderDataTypes } from "./types";
 
+interface ReducerProps {
+  type: string;
+  element?: any | number;
+}
+type OrderAction =
+  | { type: "choose"; element: HTMLInputElement }
+  | { type: "change"; element: HTMLInputElement }
+  | { type: "select"; element: HTMLInputElement }
+  | { type: "reset" }
+  | { type: "setBMI"; element: number };
+
 interface OrderDataContextValue {
   orderData: OrderDataTypes;
   //dispatch: (prev: OrderDataTypes) => void;
-  dispatch: React.Dispatch<any>
+  dispatch: React.Dispatch<Readonly<OrderAction>>;
 }
 
 export const initOrderData = {
@@ -28,10 +39,15 @@ export const initOrderData = {
     userInfo: "",
   },
 };
+// type dispatchType =
+//   | { type: "setBMI"; element: number }
+//   | { type: "choose"; element: HTMLInputElement }
+//   | { type: "change"; element: HTMLInputElement }
+//   | { type: "reset" };
 
 const OrderDataContext = React.createContext<OrderDataContextValue>({
   orderData: initOrderData,
-  dispatch: (prev: OrderDataTypes) => prev,
+  dispatch: null,
 });
 
 export { OrderDataContext };

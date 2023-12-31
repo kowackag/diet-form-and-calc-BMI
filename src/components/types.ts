@@ -11,7 +11,7 @@ export type OrderDataTypes = {
   gluten: boolean;
   excluded1: string;
   excluded2: string;
-  bmi?: number;
+  bmi: number;
   personalData: {
     userName: string;
     userEmail: string;
@@ -19,3 +19,11 @@ export type OrderDataTypes = {
     userInfo: string;
   };
 };
+
+export interface DataFirstStageTypes {
+  weight?: number;
+  height?: number;
+  gender?: string;
+  born?: Date;
+  activity?: string;
+}

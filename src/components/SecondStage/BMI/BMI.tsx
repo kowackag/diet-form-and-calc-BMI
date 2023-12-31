@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "common/components/Text/Text.styled";
 import { StyledBMI } from "./BMI.styled";
-import Subtitle from "../../Subtitle/Subtitle";
+import { Subtitle } from "../../../common/components/Subtitle/Subtitle";
 import { getBmiInfo } from "../helpers";
 
 const BMI = ({ bmi }) => {

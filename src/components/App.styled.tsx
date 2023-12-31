@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.section`
-  margin: 50px auto;
+  width: 868px;
   padding: 50px;
-  max-width: 800px;
   box-shadow: 8px 8px 20px #ccd1d8, 8px 8px 20px #ccd1d8;
   background-color: rgb(var(--color-alfa));
   color: rgb(var(--color-font));

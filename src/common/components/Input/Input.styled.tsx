@@ -4,7 +4,7 @@ export const InputContainer = styled.div<{
   unit?: string;
 }>`
   display: flex;
-  border-radius: 0.8rem;
+  border-radius: 4px;
   box-shadow: inset 4px 4px 6px rgb(var(--color-beta)),
     inset -4px -4px 6px rgb(var(--color-gamma));
   background-color: rgb(var(--color-alfa));
@@ -32,12 +32,12 @@ export const StyledInput = styled.input<{
   flex-grow: 2;
   outline: none;
   border: none;
-  border-top-left-radius: 0.8rem;
-  border-bottom-left-radius: 0.8rem;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
   background-color: transparent;
   color: rgba(var(--color-font), 0.8);
-  border-top-right-radius: ${({ unit }) => !unit && ".8rem"};
-  border-bottom-right-radius: ${({ unit }) => !unit && ".8rem"};
+  border-top-right-radius: ${({ unit }) => !unit && "4px"};
+  border-bottom-right-radius: ${({ unit }) => !unit && "4px"};
   font-size: 1.4rem;
 
   &:focus {

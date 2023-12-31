@@ -5,7 +5,6 @@ export const StyledLabel = styled.label`
   margin-top: 2.2rem;
   margin-bottom: 0.4rem;
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--color-font);
 `;
-
