@@ -1,6 +1,5 @@
 import React from "react";
 import { OrderDataTypes } from "./types";
-import { DataFirstStageTypes } from "./types";
 
 type OrderAction =
   | { type: "choose"; element: HTMLInputElement }
@@ -8,7 +7,7 @@ type OrderAction =
   | { type: "select"; element: HTMLInputElement }
   | { type: "reset" }
   | { type: "setBMI"; element: number }
-  | { type: "setFirstStageData"; element: DataFirstStageTypes };
+  | { type: "setFirstStageData"; element: Partial<OrderDataTypes> };
 
 interface OrderDataContextValue {
   orderData: OrderDataTypes;

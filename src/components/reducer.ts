@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 import { OrderDataTypes } from "./types";
-import { DataFirstStageTypes } from "./types";
+
 export const useHandler = () => {
   const init = {
     gender: "",
@@ -30,7 +30,7 @@ export const useHandler = () => {
     | { type: "select"; element: HTMLInputElement }
     | { type: "reset" }
     | { type: "setBMI"; element: number }
-    | { type: "setFirstStageData"; element: DataFirstStageTypes }
+    | { type: "setFirstStageData"; element: OrderDataTypes }
   >;
 
   const reducer = (state: OrderDataTypes, action: Readonly<OrderAction>) => {
@@ -54,7 +54,6 @@ export const useHandler = () => {
           : { ...state, [name]: copyValue };
         return checkResult;
       case "setFirstStageData":
-        console.log(action.element);
         const copyData = { ...state, ...action.element };
         return copyData;
       case "choose":

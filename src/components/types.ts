@@ -27,3 +27,8 @@ export interface DataFirstStageTypes {
   born?: Date;
   activity?: string;
 }
+
+export interface DataSecondStageTypes {
+  goal?: string;
+  targetWeight?: number;
+}

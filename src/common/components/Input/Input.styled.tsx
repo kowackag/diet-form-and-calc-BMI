@@ -24,7 +24,7 @@ export const Unit = styled.span`
 `;
 
 export const StyledInput = styled.input<{
-  unit: string;
+  unit?: string;
 }>`
   display: inline-block;
   padding: 1rem 1rem;
