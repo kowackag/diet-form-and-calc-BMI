@@ -4,7 +4,6 @@ import { Label } from "common/components/Label/Label";
 import { Error } from "common/components/Error/Error";
 import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
 import { Search } from "common/components/Search/Search";
-
 import { OrderDataContext } from "components/context";
 
 interface FieldsType {
@@ -12,7 +11,6 @@ interface FieldsType {
   type: string;
   unit?: string;
   name: "weight" | "height" | "born";
-  value: number | string | Date;
   err: string;
 }
 
@@ -24,7 +22,7 @@ export const Parameters = ({
   bornError,
 }) => {
   const { orderData } = useContext(OrderDataContext);
-  const { gender, weight, height, born } = orderData;
+  const { gender } = orderData;
 
   const fields: FieldsType[] = [
     {
@@ -32,7 +30,6 @@ export const Parameters = ({
       type: "number",
       unit: "kg",
       name: "weight",
-      value: weight,
       err: weightError,
     },
     {
@@ -40,14 +37,12 @@ export const Parameters = ({
       type: "number",
       unit: "cm",
       name: "height",
-      value: height,
       err: heightError,
     },
     {
       label: "Data urodzenia",
       type: "date",
       name: "born",
-      value: born,
       err: bornError,
     },
   ];
@@ -65,7 +60,7 @@ export const Parameters = ({
         />
         {genderError && <Error err={genderError} />}
       </div>
-      {fields.map(({ label, type, unit, name, value, err }) => (
+      {fields.map(({ label, type, unit, name, err }) => (
         <React.Fragment key={name}>
           <div>
             <Label htmlFor={name}>{label}</Label>
@@ -75,7 +70,6 @@ export const Parameters = ({
               type={type}
               unit={unit}
               name={name}
-              value={value}
             />
             {err && <Error err={err} />}
           </div>

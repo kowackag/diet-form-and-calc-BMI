@@ -42,8 +42,6 @@ export const validateDataFirstStage = ({
     const copyErrors = { height: "Błędnie podany wzrost" };
     errors = { ...errors, ...copyErrors };
   }
-  const regDate =
-    /(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[0-2])-(0[0-9]|[12][0-9]|3[01])/;
 
   if (!activity) {
     const copyErrors = { activity: "Uzupełnij rodzaj aktywności" };

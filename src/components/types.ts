@@ -2,7 +2,7 @@ export type OrderDataTypes = {
   gender: string;
   weight: number;
   height: number;
-  born: Date;
+  born: Date | string;
   activity: string;
   goal: string;
   targetWeight: number;
@@ -24,7 +24,7 @@ export interface DataFirstStageTypes {
   weight?: number;
   height?: number;
   gender?: string;
-  born?: Date;
+  born?: Date | string;
   activity?: string;
 }
 

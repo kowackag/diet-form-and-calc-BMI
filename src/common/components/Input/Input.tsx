@@ -8,10 +8,8 @@ interface InputProps {
   id: string;
   type: string;
   unit?: string;
-  value: string | number | Date;
   title?: string;
   name: "weight" | "height" | "born" | "targetWeight";
-  // onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export const Input = ({

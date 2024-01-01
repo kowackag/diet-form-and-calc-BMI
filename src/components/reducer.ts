@@ -6,7 +6,7 @@ export const useHandler = () => {
     gender: "",
     weight: 0,
     height: 0,
-    born: new Date(),
+    born: new Date("2000-01-01"),
     activity: "",
     goal: "",
     targetWeight: 0,

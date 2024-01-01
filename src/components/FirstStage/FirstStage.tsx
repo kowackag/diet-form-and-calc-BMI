@@ -7,7 +7,7 @@ import { Button } from "common/components/Button/Button";
 import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
 import { Parameters } from "./Parameters";
 import { Activity } from "./Activity";
-
+import { convertDateToString } from "./helpers";
 import { OrderDataContext } from "components/context";
 import { firstStageValidateSchema } from "./firstStagevalidationSchema";
 import { countBMI } from "./helpers";
@@ -16,7 +16,7 @@ import { DataFirstStageTypes } from "../types";
 export const FirstStage = () => {
   const { orderData, dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
-
+  console.log(orderData?.born);
   const {
     register,
     handleSubmit,
@@ -28,7 +28,7 @@ export const FirstStage = () => {
       gender: orderData?.gender,
       weight: orderData?.weight || 60,
       height: orderData?.height || 160,
-      born: orderData?.born,
+      born: convertDateToString(orderData?.born),
       activity: orderData?.activity,
     },
   });
@@ -55,7 +55,11 @@ export const FirstStage = () => {
             heightError={errors.height?.message}
             bornError={errors.born?.message}
           />
-          <Activity register={register} error={errors.activity?.message} activity={orderData.activity} />
+          <Activity
+            register={register}
+            error={errors.activity?.message}
+            activity={orderData.activity}
+          />
         </FlexContainer>
         <ButtonBox>
           <Button type="submit" onClick={onClickHandler}>
