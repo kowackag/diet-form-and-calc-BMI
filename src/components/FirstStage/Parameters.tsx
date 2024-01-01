@@ -23,18 +23,8 @@ export const Parameters = ({
   heightError,
   bornError,
 }) => {
-  const { orderData, dispatch } = useContext(OrderDataContext);
+  const { orderData } = useContext(OrderDataContext);
   const { gender, weight, height, born } = orderData;
-
-  const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    dispatch({ type: "change", element: e.target });
-  };
-
-  const chooseElement = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    dispatch({ type: "choose", element: e.target });
-  };
 
   const fields: FieldsType[] = [
     {
@@ -71,8 +61,6 @@ export const Parameters = ({
           name="gender"
           value={gender}
           register={register}
-          // onChange={changeValue}
-          // onChoose={chooseElement}
           isMutable={false}
         />
         {genderError && <Error err={genderError} />}
@@ -88,7 +76,6 @@ export const Parameters = ({
               unit={unit}
               name={name}
               value={value}
-              onChange={changeValue}
             />
             {err && <Error err={err} />}
           </div>

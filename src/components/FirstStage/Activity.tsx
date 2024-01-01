@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 
 import { Subtitle } from "common/components/Subtitle/Subtitle";
 import { Radio } from "common/components/Radio/Radio";
@@ -8,8 +8,8 @@ import { FlexContainer } from "common/components/FlexContainer/FlexContainer.sty
 
 import { Text } from "common/components/Text/Text.styled";
 
-export const Activity = ({ error, register }) => {
-  const [activity, setActivity] = useState("");
+export const Activity = ({ error, register, activity: active }) => {
+  const [activity, setActivity] = useState(active);
   const fields = [
     {
       value: "none",

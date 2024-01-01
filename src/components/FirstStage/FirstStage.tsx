@@ -11,10 +11,10 @@ import { Activity } from "./Activity";
 import { OrderDataContext } from "components/context";
 import { firstStageValidateSchema } from "./firstStagevalidationSchema";
 import { countBMI } from "./helpers";
-import { DataFirstStageTypes } from "./../types";
+import { DataFirstStageTypes } from "../types";
 
 export const FirstStage = () => {
-  const { dispatch } = useContext(OrderDataContext);
+  const { orderData, dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
 
   const {
@@ -25,9 +25,11 @@ export const FirstStage = () => {
     resolver: yupResolver(firstStageValidateSchema),
     mode: "all",
     defaultValues: {
-      gender: "",
-      weight: 60,
-      height: 160,
+      gender: orderData?.gender,
+      weight: orderData?.weight || 60,
+      height: orderData?.height || 160,
+      born: orderData?.born,
+      activity: orderData?.activity,
     },
   });
 
@@ -36,7 +38,6 @@ export const FirstStage = () => {
 
     if (formIsValid) {
       const bmi = countBMI(data.weight, data.height);
-      console.log(data);
       const copyData = { ...data, bmi };
       dispatch({ type: "setFirstStageData", element: copyData });
       navigate("/diet-form-and-calc-BMI/2");
@@ -54,7 +55,7 @@ export const FirstStage = () => {
             heightError={errors.height?.message}
             bornError={errors.born?.message}
           />
-          <Activity register={register} error={errors.activity?.message} />
+          <Activity register={register} error={errors.activity?.message} activity={orderData.activity} />
         </FlexContainer>
         <ButtonBox>
           <Button type="submit" onClick={onClickHandler}>
