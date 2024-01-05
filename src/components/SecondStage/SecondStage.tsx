@@ -16,15 +16,16 @@ import { ButtonBox } from "components/ButtonBox/ButtonBox";
 import BMI from "./BMI/BMI";
 import { OrderDataContext } from "components/context";
 import { secondStageValidationSchema } from "./secondStageValidationSchema";
-import { StyledSecondStage, Form } from "./SecondStage.styled";
 import { DataSecondStageTypes } from "../types";
+
+import { StyledSecondStage, Form } from "./SecondStage.styled";
+
 export const SecondStage = () => {
   const { orderData, dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
 
   const [radioValue, setRadioValue] = useState(orderData?.goal || "stable");
-  const { targetWeight } = orderData;
-  console.log(targetWeight);
+
   const {
     register,
     handleSubmit,
@@ -80,7 +81,6 @@ export const SecondStage = () => {
                   type="number"
                   unit="kg"
                   name="targetWeight"
-                  value={targetWeight}
                 />
                 {errors?.targetWeight && (
                   <Error err={errors.targetWeight?.message} />
