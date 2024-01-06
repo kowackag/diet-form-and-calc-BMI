@@ -32,3 +32,11 @@ export interface DataSecondStageTypes {
   goal?: string;
   targetWeight?: number;
 }
+
+export interface DataThirdStageTypes {
+  diet?: string;
+  lactosy?: boolean;
+  gluten?: boolean;
+  excluded1?: string;
+  excluded2?: string;
+}
