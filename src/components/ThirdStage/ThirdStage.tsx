@@ -12,7 +12,7 @@ import { Error } from "common/components/Error/Error";
 import { Search } from "../../common/components/Search/Search";
 import Checkbox from "../Checkbox/Checkbox";
 import { Subtitle } from "common/components/Subtitle/Subtitle";
-//import { loadProductsAPI } from "../DataAPI";
+// import { loadProductsAPI } from "../DataAPI";
 
 import { validateDataThirdStage } from "components/validateData";
 import { OrderDataContext } from "components/context";
@@ -26,22 +26,42 @@ import { thirdStageValidateSchema } from "./thirdStageValidationSchema";
 import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
 
 export const ThirdStage = () => {
-  const { orderData, dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
 
-  const [err, setErr] = useState(null);
-
+  const { orderData, dispatch } = useContext(OrderDataContext);
   const { diet, lactosy, gluten, excluded1, excluded2 } = orderData;
-  const [products, setProducts] = useState([]);
+
+  // const [products, setProducts] = useState([]);
 
   // useEffect(() => {
   //   loadProductsAPI()
   //     .then((item) => item)
   //     .then((data) => {
-  //       console.log(data);
   //       setProducts(data);
   //     });
   // }, []);
+
+  // temporary data
+
+  const products = [
+    "pomidor",
+    "cebula",
+    "kapusta",
+    "groch",
+    "czosnek",
+    "orzechy",
+    "wątróbka",
+    "suszone owoce",
+    "cukinia",
+    "szpinak",
+    "rukola",
+    "grzyby",
+    "szczypiorek",
+    "brokuł",
+    "ser żółty",
+    "maślanka",
+    "kefir",
+  ];
 
   const {
     register,
@@ -55,10 +75,10 @@ export const ThirdStage = () => {
       lactosy,
       gluten,
       excluded1,
-      excluded2
+      excluded2,
     },
   });
-
+  console.log(excluded1);
   const changeValue = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     e.preventDefault();
     dispatch({ type: "change", element: e.target as HTMLInputElement });
@@ -71,7 +91,6 @@ export const ThirdStage = () => {
 
   const onClickHandler = handleSubmit((data, event) => {
     event.preventDefault();
-    console.log(data);
     if (formIsValid) {
       dispatch({ type: "setFirstStageData", element: data });
       navigate("/diet-form-and-calc-BMI/4");
@@ -123,7 +142,7 @@ export const ThirdStage = () => {
                 <RadioInfo>{desc}</RadioInfo>
               </Radio>
             ))}
-            {err?.diet && <Error err={err.diet} />}
+            {errors?.diet && <Error err={errors.diet?.message} />}
           </Container>
           <Container width="45%">
             <div className="box">
