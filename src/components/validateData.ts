@@ -2,7 +2,7 @@ interface DataFirstStageProps {
   weight: number;
   height: number;
   gender: string;
-  born: string;
+  born: Date;
   activity: string;
 }
 
@@ -17,9 +17,9 @@ interface DataThirdStageProps {
 }
 
 interface DataLastStageProps {
-    userName: string;
-    userEmail: string;
-    userPhone: string;
+  userName: string;
+  userEmail: string;
+  userPhone: string;
 }
 
 export const validateDataFirstStage = ({
@@ -42,12 +42,7 @@ export const validateDataFirstStage = ({
     const copyErrors = { height: "Błędnie podany wzrost" };
     errors = { ...errors, ...copyErrors };
   }
-  const regDate =
-    /(19[0-9]{2}|20[0-9]{2})-(0[1-9]|1[0-2])-(0[0-9]|[12][0-9]|3[01])/;
-  if (!regDate.test(born)) {
-    const copyErrors = { born: "Wprowadzono błędną datę urodzenia" };
-    errors = { ...errors, ...copyErrors };
-  }
+
   if (!activity) {
     const copyErrors = { activity: "Uzupełnij rodzaj aktywności" };
     errors = { ...errors, ...copyErrors };
@@ -90,7 +85,11 @@ export const validateDataThirdStage = ({ diet }: DataThirdStageProps) => {
   return errors;
 };
 
-export const validateDataLastStage = ({ userName, userEmail, userPhone }: DataLastStageProps) => {
+export const validateDataLastStage = ({
+  userName,
+  userEmail,
+  userPhone,
+}: DataLastStageProps) => {
   let errors = {};
   if (userName.length < 3) {
     const copyErrors = { userName: "Wpisz poprawnie imię i Nazwisko" };

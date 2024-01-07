@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  StyledSearch,
-  SearchInput,
-  ListItem,
-} from "./Search.styled";
+import { StyledSearch, SearchInput, ListItem } from "./Search.styled";
 
 export const Search = ({ name, value, items, register, isMutable }) => {
   const [isActive, setIsActive] = useState(false);
@@ -28,8 +24,11 @@ export const Search = ({ name, value, items, register, isMutable }) => {
     <StyledSearch>
       <SearchInput {...register(name)} name={name}>
         <ListItem value=""></ListItem>
-        <ListItem value="kobieta">kobieta</ListItem>
-        <ListItem value="mężczyzna">mężczyzna</ListItem>
+        {items.map((item: string) => (
+          <ListItem key={item} value={item}>
+            {item}
+          </ListItem>
+        ))}
       </SearchInput>
     </StyledSearch>
   );

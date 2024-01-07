@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button } from "common/components/Button/Button";
 import { Input } from "common/components/Input/Input";
@@ -12,8 +14,9 @@ import { FlexContainer } from "common/components/FlexContainer/FlexContainer.sty
 import { ButtonBox } from "components/ButtonBox/ButtonBox";
 
 import BMI from "./BMI/BMI";
-import { validateDataSecondStage } from "components/validateData";
 import { OrderDataContext } from "components/context";
+import { secondStageValidationSchema } from "./secondStageValidationSchema";
+import { DataSecondStageTypes } from "../types";
 
 import { StyledSecondStage, Form } from "./SecondStage.styled";
 
@@ -21,70 +24,67 @@ export const SecondStage = () => {
   const { orderData, dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
 
-  const [err, setErr] = useState(null);
-  const { goal, targetWeight } = orderData;
+  const [radioValue, setRadioValue] = useState(orderData?.goal || "stable");
 
-  const changeValue = (
-    e:
-      | React.MouseEvent<HTMLInputElement, MouseEvent>
-      | React.ChangeEvent<HTMLInputElement>
-  ) => {
-    e.preventDefault();
-    dispatch({ type: "change", element: e.target as HTMLInputElement });
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid: formIsValid },
+  } = useForm<DataSecondStageTypes>({
+    resolver: yupResolver(secondStageValidationSchema),
+    mode: "all",
+    defaultValues: {
+      goal: radioValue,
+      targetWeight: orderData?.targetWeight || orderData.weight,
+    },
+  });
 
-  const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const data = {
-      weight: orderData.weight,
-      goal: orderData.goal,
-      targetWeight: orderData.targetWeight,
-    };
-
-    const errors = validateDataSecondStage(data);
-    setErr({ ...errors });
-    if (Object.keys(errors).length === 0) {
+  const onClickHandler = handleSubmit((data, event) => {
+    event.preventDefault();
+    if (formIsValid) {
+      dispatch({ type: "setFirstStageData", element: data });
       navigate("/diet-form-and-calc-BMI/3");
     }
-  };
+  });
 
   const fields = [
-    { name: "goal", value: "stable", desc: "Utrzymanie masy ciała" },
-    { name: "goal", value: "reduction", desc: "Redukcja masy ciała" },
-    { name: "goal", value: "muscle-mass", desc: "Wzrost masy mięśniowej" },
+    { value: "stable", label: "Utrzymanie masy ciała" },
+    { value: "reduction", label: "Redukcja masy ciała" },
+    { value: "muscle-mass", label: "Wzrost masy mięśniowej" },
   ];
 
   return (
     <StyledSecondStage>
-      <Form onSubmit={handleForm}>
+      <Form>
         <FlexContainer>
           <Container width="45%">
             <Subtitle>Cel diety:</Subtitle>
-            {fields.map(({ name, value, desc }) => (
+            {fields.map(({ value, label }) => (
               <Radio
+                register={register}
                 key={value}
-                active={goal === value}
-                name={name}
+                name="goal"
                 value={value}
-                onClick={changeValue}
+                active={radioValue === value}
+                onClick={() => setRadioValue(value)}
               >
-                <p>{desc}</p>
+                <p>{label}</p>
               </Radio>
             ))}
-            {err?.goal && <Error err={err.goal} />}
-            {goal !== "stable" && (
+            {errors.goal && <Error err={errors.goal?.message} />}
+            {radioValue !== "stable" && (
               <>
                 <Label htmlFor="targetWeight">Docelowa masa ciała</Label>
                 <Input
+                  register={register}
                   id="targetWeight"
                   type="number"
                   unit="kg"
                   name="targetWeight"
-                  value={targetWeight}
-                  onChange={changeValue}
                 />
-                {err?.targetWeight && <Error err={err.targetWeight} />}
+                {errors?.targetWeight && (
+                  <Error err={errors.targetWeight?.message} />
+                )}
               </>
             )}
           </Container>
@@ -94,11 +94,12 @@ export const SecondStage = () => {
           <Button
             variant="secondary"
             onClick={() => navigate("/diet-form-and-calc-BMI/1")}
-            type="button"
           >
             Wstecz
           </Button>
-          <Button>Dalej</Button>
+          <Button type="submit" onClick={onClickHandler}>
+            Dalej
+          </Button>
         </ButtonBox>
       </Form>
     </StyledSecondStage>

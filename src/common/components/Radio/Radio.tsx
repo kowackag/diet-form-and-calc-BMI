@@ -1,11 +1,11 @@
 import React from "react";
 import { StyledRadio } from "./Radio.styled";
-import { DataFirstStageTypes } from "components/types";
+import { OrderDataTypes } from "components/types";
 import { UseFormRegister } from "react-hook-form";
 
 interface RadioProps {
-  register: UseFormRegister<DataFirstStageTypes>;
-  name: "activity"
+  register: UseFormRegister<Partial<OrderDataTypes>>;
+  name: "activity" | "goal" |"diet"
   value: string;
   active: boolean;
   onClick: React.MouseEventHandler<HTMLInputElement>;

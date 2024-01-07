@@ -7,16 +7,16 @@ import { Button } from "common/components/Button/Button";
 import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
 import { Parameters } from "./Parameters";
 import { Activity } from "./Activity";
-
+import { convertDateToString } from "./helpers";
 import { OrderDataContext } from "components/context";
 import { firstStageValidateSchema } from "./firstStagevalidationSchema";
 import { countBMI } from "./helpers";
-import { DataFirstStageTypes } from "./../types";
+import { DataFirstStageTypes } from "../types";
 
 export const FirstStage = () => {
-  const { dispatch } = useContext(OrderDataContext);
+  const { orderData, dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
-
+  console.log(orderData?.born);
   const {
     register,
     handleSubmit,
@@ -25,9 +25,11 @@ export const FirstStage = () => {
     resolver: yupResolver(firstStageValidateSchema),
     mode: "all",
     defaultValues: {
-      gender: "",
-      weight: 60,
-      height: 160,
+      gender: orderData?.gender,
+      weight: orderData?.weight || 60,
+      height: orderData?.height || 160,
+      born: convertDateToString(orderData?.born),
+      activity: orderData?.activity,
     },
   });
 
@@ -36,47 +38,11 @@ export const FirstStage = () => {
 
     if (formIsValid) {
       const bmi = countBMI(data.weight, data.height);
-      dispatch({ type: "setBMI", element: bmi });
-      // navigate("/diet-form-and-calc-BMI/2");
+      const copyData = { ...data, bmi };
+      dispatch({ type: "setFirstStageData", element: copyData });
+      navigate("/diet-form-and-calc-BMI/2");
     }
   });
-
-  // const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-
-  //   const data = {
-  //     weight: orderData.weight,
-  //     height: orderData.height,
-  //     gender: orderData.gender,
-  //     born: orderData.born,
-  //     activity: orderData.activity,
-  //   };
-
-  //   const errors = validateDataFirstStage(data);
-  //   setErr({ ...errors });
-
-  //   if (Object.keys(errors).length === 0) {
-  //     const { weight, height } = data;
-  //     const bmi = countBMI(weight, height);
-  //     dispatch({ type: "setBMI", element: bmi });
-  //     // navigate("/diet-form-and-calc-BMI/2");
-  //   }
-  // };
-
-  // const validateForm = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-
-  //   const data = {
-  //     weight: orderData.weight,
-  //     height: orderData.height,
-  //     gender: orderData.gender,
-  //     born: orderData.born,
-  //     activity: orderData.activity,
-  //   };
-
-  //   const errors = validateDataFirstStage(data);
-  //   setErr({ ...errors });
-  // };
 
   return (
     <div>
@@ -89,7 +55,11 @@ export const FirstStage = () => {
             heightError={errors.height?.message}
             bornError={errors.born?.message}
           />
-          <Activity register={register} error={errors.activity?.message} />
+          <Activity
+            register={register}
+            error={errors.activity?.message}
+            activity={orderData.activity}
+          />
         </FlexContainer>
         <ButtonBox>
           <Button type="submit" onClick={onClickHandler}>

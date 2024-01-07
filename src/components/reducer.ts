@@ -6,7 +6,7 @@ export const useHandler = () => {
     gender: "",
     weight: 0,
     height: 0,
-    born: "",
+    born: new Date("2000-01-01"),
     activity: "",
     goal: "",
     targetWeight: 0,
@@ -30,6 +30,7 @@ export const useHandler = () => {
     | { type: "select"; element: HTMLInputElement }
     | { type: "reset" }
     | { type: "setBMI"; element: number }
+    | { type: "setFirstStageData"; element: OrderDataTypes }
   >;
 
   const reducer = (state: OrderDataTypes, action: Readonly<OrderAction>) => {
@@ -52,6 +53,9 @@ export const useHandler = () => {
             }
           : { ...state, [name]: copyValue };
         return checkResult;
+      case "setFirstStageData":
+        const copyData = { ...state, ...action.element };
+        return copyData;
       case "choose":
         if (action.element) {
           let nameLi = action.element.getAttribute("name");

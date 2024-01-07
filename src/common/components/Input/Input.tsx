@@ -1,16 +1,15 @@
 import React from "react";
 import { StyledInput, Unit, InputContainer } from "./Input.styled";
 import { UseFormRegister } from "react-hook-form";
-import { DataFirstStageTypes } from "components/types";
+import { OrderDataTypes } from "components/types";
+
 interface InputProps {
-  register: UseFormRegister<DataFirstStageTypes>;
+  register: UseFormRegister<Partial<OrderDataTypes>>;
   id: string;
   type: string;
   unit?: string;
-  value: string | number;
   title?: string;
-  name: "weight" | "height" | "born";
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  name: "weight" | "height" | "born" | "targetWeight";
 }
 
 export const Input = ({
