@@ -10,11 +10,10 @@ import { Button } from "common/components/Button/Button";
 import { Label } from "common/components/Label/Label";
 import { Error } from "common/components/Error/Error";
 import { Search } from "../../common/components/Search/Search";
-import Checkbox from "../Checkbox/Checkbox";
+import { Checkbox } from "components/Checkbox/Checkbox";
 import { Subtitle } from "common/components/Subtitle/Subtitle";
 // import { loadProductsAPI } from "../DataAPI";
 
-import { validateDataThirdStage } from "components/validateData";
 import { OrderDataContext } from "components/context";
 import { DataThirdStageTypes } from "../types";
 
@@ -27,7 +26,7 @@ import { FlexContainer } from "common/components/FlexContainer/FlexContainer.sty
 
 export const ThirdStage = () => {
   const navigate = useNavigate();
-
+  const [dietType, setDietType] = useState("");
   const { orderData, dispatch } = useContext(OrderDataContext);
   const { diet, lactosy, gluten, excluded1, excluded2 } = orderData;
 
@@ -78,20 +77,11 @@ export const ThirdStage = () => {
       excluded2,
     },
   });
-  console.log(excluded1);
-  const changeValue = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-    e.preventDefault();
-    dispatch({ type: "change", element: e.target as HTMLInputElement });
-  };
-
-  const chooseElement = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    dispatch({ type: "choose", element: e.target });
-  };
 
   const onClickHandler = handleSubmit((data, event) => {
     event.preventDefault();
     if (formIsValid) {
+      console.log(data);
       dispatch({ type: "setFirstStageData", element: data });
       navigate("/diet-form-and-calc-BMI/4");
     }
@@ -135,8 +125,8 @@ export const ThirdStage = () => {
                 key={value}
                 name="diet"
                 value={value}
-                onClick={changeValue}
-                active={diet === value}
+                onClick={() => setDietType(value)}
+                active={dietType === value}
               >
                 <Text weight="bold"> {label}</Text>
                 <RadioInfo>{desc}</RadioInfo>
@@ -147,11 +137,11 @@ export const ThirdStage = () => {
           <Container width="45%">
             <div className="box">
               <Label>Dieta bezglutenowa?</Label>
-              <Checkbox name="gluten" onClick={changeValue} />
+              <Checkbox name="gluten" onClick={() => console.log(gluten)} />
             </div>
             <div className="box">
               <Label>Dieta bez laktozy?</Label>
-              <Checkbox name="lactosy" onClick={changeValue} />
+              <Checkbox name="lactosy" onClick={() => console.log(lactosy)} />
             </div>
             <Subtitle>Wykluczenia z diety:</Subtitle>
             {searchFields.map(({ name, value, label }) => (

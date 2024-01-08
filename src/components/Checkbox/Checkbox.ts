@@ -1,7 +1,7 @@
 import React from "react";
-import StyledCheckbox from "./Checkbox.styled";
+import { StyledCheckbox } from "./Checkbox.styled";
 
-const Checkbox = ({ name, onClick }) => {
+export const Checkbox = ({ name, onClick }) => {
   return (
     <StyledCheckbox checked={true}>
       <input id={name} type="checkbox" name={name} onClick={onClick} />
@@ -9,5 +9,3 @@ const Checkbox = ({ name, onClick }) => {
     </StyledCheckbox>
   );
 };
-
-export default Checkbox;

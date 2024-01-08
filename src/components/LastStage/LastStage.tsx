@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Subtitle } from "common/components/Subtitle/Subtitle";
 import { ButtonBox } from "components/ButtonBox/ButtonBox";
 import { Button } from "common/components/Button/Button";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "common/components/Input/Input";
 import { Label } from "common/components/Label/Label";
 import { Error } from "common/components/Error/Error";
@@ -12,9 +14,11 @@ import { validateDataLastStage } from "components/validateData";
 import { OrderDataContext } from "components/context";
 
 const LastStage = () => {
-  const { orderData, dispatch } = useContext(OrderDataContext);
+  const {
+    orderData: { personalData },
+    dispatch,
+  } = useContext(OrderDataContext);
 
-  const { personalData } = orderData;
   const navigate = useNavigate();
   const [err, setErr] = useState(null);
 
@@ -27,6 +31,9 @@ const LastStage = () => {
     dispatch({ type: "change", element: e.target as HTMLInputElement });
   };
 
+
+
+  
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -48,7 +55,6 @@ const LastStage = () => {
     {
       label: "Imię i Nazwisko:",
       type: "text",
-      name: "personalData",
       key: "userName",
       value: personalData.userName,
       err: err?.userName,
@@ -56,7 +62,6 @@ const LastStage = () => {
     {
       label: "Adres email:",
       type: "email",
-      name: "personalData",
       key: "userEmail",
       value: personalData.userEmail,
       err: err?.userEmail,
@@ -64,7 +69,6 @@ const LastStage = () => {
     {
       label: "Telefon:",
       type: "text",
-      name: "personalData",
       key: "userPhone",
       value: personalData.userPhone,
       err: err?.userPhone,
@@ -72,7 +76,6 @@ const LastStage = () => {
     {
       label: "Uwagi:",
       type: "text",
-      name: "personalData",
       key: "userInfo",
       value: personalData.userInfo,
     },
@@ -82,14 +85,14 @@ const LastStage = () => {
     <div>
       <Subtitle>Proszę o podanie danych kontaktowych.</Subtitle>
       <form onSubmit={handleForm}>
-        <div>
+        {/* <div>
           {fields.map(({ label, name, type, value, err, key }) => (
             <React.Fragment key={key}>
               <Label htmlFor={key}>{label}</Label>
               <Input
                 type={type}
                 id={key}
-                name={name}
+                name="personalData"
                 value={value}
                 title={key}
                 onChange={changeValue}
@@ -97,7 +100,7 @@ const LastStage = () => {
               {err && <Error err={err} />}
             </React.Fragment>
           ))}
-        </div>
+        </div> */}
         <ButtonBox>
           <Button
             onClick={() => navigate("/diet-form-and-calc-BMI/3")}
