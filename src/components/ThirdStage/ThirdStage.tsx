@@ -26,9 +26,12 @@ import { FlexContainer } from "common/components/FlexContainer/FlexContainer.sty
 
 export const ThirdStage = () => {
   const navigate = useNavigate();
-  const [dietType, setDietType] = useState("");
-  const { orderData, dispatch } = useContext(OrderDataContext);
-  const { diet, lactosy, gluten, excluded1, excluded2 } = orderData;
+  const {
+    orderData: { diet, lactosy, gluten, excluded1, excluded2 },
+    dispatch,
+  } = useContext(OrderDataContext);
+
+  const [dietType, setDietType] = useState(diet);
 
   // const [products, setProducts] = useState([]);
 
@@ -81,7 +84,6 @@ export const ThirdStage = () => {
   const onClickHandler = handleSubmit((data, event) => {
     event.preventDefault();
     if (formIsValid) {
-      console.log(data);
       dispatch({ type: "setFirstStageData", element: data });
       navigate("/diet-form-and-calc-BMI/4");
     }
@@ -128,7 +130,9 @@ export const ThirdStage = () => {
                 onClick={() => setDietType(value)}
                 active={dietType === value}
               >
-                <Text weight="bold"> {label}</Text>
+                <Text weight="500" mb="6px">
+                  {label}
+                </Text>
                 <RadioInfo>{desc}</RadioInfo>
               </Radio>
             ))}
@@ -136,14 +140,20 @@ export const ThirdStage = () => {
           </Container>
           <Container width="45%">
             <div className="box">
-              <Label>Dieta bezglutenowa?</Label>
-              <Checkbox name="gluten" onClick={() => console.log(gluten)} />
+              <Text weight="500" size="14px" mt="16px">
+                Dieta bezglutenowa?
+              </Text>
+              <Checkbox register={register} name="gluten" />
             </div>
             <div className="box">
-              <Label>Dieta bez laktozy?</Label>
-              <Checkbox name="lactosy" onClick={() => console.log(lactosy)} />
+              <Text weight="500" size="14px" mt="16px">
+                Dieta bez laktozy?
+              </Text>
+              <Checkbox register={register} name="lactosy" />
             </div>
-            <Subtitle>Wykluczenia z diety:</Subtitle>
+            <Text weight="500" mt="26px">
+              Wykluczenia z diety:
+            </Text>
             {searchFields.map(({ name, value, label }) => (
               <React.Fragment key={name}>
                 <Label>{label}</Label>

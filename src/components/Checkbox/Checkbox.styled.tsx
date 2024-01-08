@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const StyledCheckbox = styled.div`
+export const StyledCheckbox = styled.div<{
+  checked: boolean;
+}>`
   position: relative;
   display: block;
   margin: 2.2rem 0 0.4rem;

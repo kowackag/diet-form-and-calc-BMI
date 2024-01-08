@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const RadioInfo = styled.p`
   max-width: 90%;
   font-size: 1rem;
-  color: rgba(var(--color-font), 0.5);
+  color: rgba(var(--color-font), 0.7);
 `;
 
 export const StyledRadio = styled.label<{
