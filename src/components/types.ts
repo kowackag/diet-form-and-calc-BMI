@@ -1,7 +1,7 @@
-export interface personalDataType {
-  userName: string;
-  userEmail: string;
-  userPhone: string;
+export interface personalDataTypes {
+  userName?: string;
+  userEmail?: string;
+  userPhone?: string;
   userInfo?: string;
 }
 
@@ -19,7 +19,7 @@ export type OrderDataTypes = {
   excluded1: string;
   excluded2: string;
   bmi: number;
-  personalData: personalDataType;
+  personalData: personalDataTypes;
 };
 
 export interface DataFirstStageTypes {
@@ -44,5 +44,5 @@ export interface DataThirdStageTypes {
 }
 
 export interface LastStageTypes {
-  personalData: personalDataType;
+  personalData: personalDataTypes;
 }

@@ -29,10 +29,10 @@ export const initOrderData = {
   excluded2: "",
   bmi: 0,
   personalData: {
-    userName: "",
-    userEmail: "",
-    userPhone: "",
-    userInfo: "",
+    userName: " ",
+    userEmail: " ",
+    userPhone: " ",
+    userInfo: " ",
   },
 };
 

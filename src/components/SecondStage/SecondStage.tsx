@@ -11,7 +11,7 @@ import { Error } from "common/components/Error/Error";
 import { Container } from "common/components/Container/Container.styled";
 import { Subtitle } from "common/components/Subtitle/Subtitle";
 import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
-import { ButtonBox } from "components/ButtonBox/ButtonBox";
+import { ButtonBox } from "common/components/ButtonBox/ButtonBox";
 
 import BMI from "./BMI/BMI";
 import { OrderDataContext } from "components/context";

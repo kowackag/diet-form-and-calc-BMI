@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Subtitle } from "common/components/Subtitle/Subtitle";
-import { ButtonBox } from "components/ButtonBox/ButtonBox";
+import { ButtonBox } from "common/components/ButtonBox/ButtonBox";
 import { Button } from "common/components/Button/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,7 +12,7 @@ import { Error } from "common/components/Error/Error";
 
 import { OrderDataContext } from "components/context";
 import { lastStageValidateSchema } from "./lastStageValidationSchema";
-import { LastStageTypes, personalDataType } from "components/types";
+import { LastStageTypes } from "components/types";
 
 interface FieldsTypes {
   label: string;
@@ -32,7 +32,6 @@ const LastStage = () => {
     orderData: { personalData },
     dispatch,
   } = useContext(OrderDataContext);
-
   const navigate = useNavigate();
 
   const {
@@ -42,6 +41,14 @@ const LastStage = () => {
   } = useForm({
     resolver: yupResolver<LastStageTypes>(lastStageValidateSchema),
     mode: "all",
+    defaultValues: {
+      personalData: {
+        userName: personalData.userName,
+        userEmail: personalData.userEmail,
+        userPhone: personalData.userPhone,
+        userInfo: personalData.userInfo,
+      },
+    },
   });
 
   const onClickHandler = handleSubmit(({ personalData }, event) => {
@@ -58,21 +65,21 @@ const LastStage = () => {
       type: "text",
       name: "personalData.userName",
       value: personalData?.userName,
-      err: errors?.personalData?.userName.message,
+      err: errors?.personalData?.userName?.message,
     },
     {
       label: "Adres email:",
       type: "email",
       name: "personalData.userEmail",
       value: personalData?.userEmail,
-      err: errors?.personalData?.userEmail.message,
+      err: errors?.personalData?.userEmail?.message,
     },
     {
       label: "Telefon:",
       type: "text",
       name: "personalData.userPhone",
       value: personalData?.userPhone,
-      err: errors?.personalData?.userPhone.message,
+      err: errors?.personalData?.userPhone?.message,
     },
     {
       label: "Uwagi:",

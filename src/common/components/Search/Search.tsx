@@ -22,8 +22,8 @@ export const Search = ({ name, value, items, register, isMutable }) => {
 
   return (
     <StyledSearch>
-      <SearchInput {...register(name)} name={name}>
-        <ListItem disabled selected value="">
+      <SearchInput {...register(name)} name={name} defaultValue="---wybierz---">
+        <ListItem disabled value="">
           ---wybierz---
         </ListItem>
         {items.map((item: string) => (

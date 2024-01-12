@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Radio } from "common/components/Radio/Radio";
 import { Container } from "common/components/Container/Container.styled";
-import { ButtonBox } from "../ButtonBox/ButtonBox";
+import { ButtonBox } from "../../common/components/ButtonBox/ButtonBox";
 import { Button } from "common/components/Button/Button";
 import { Label } from "common/components/Label/Label";
 import { Error } from "common/components/Error/Error";
