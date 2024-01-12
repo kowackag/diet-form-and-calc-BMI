@@ -9,7 +9,15 @@ interface InputProps {
   type: string;
   unit?: string;
   title?: string;
-  name: "weight" | "height" | "born" | "targetWeight";
+  name:
+    | "weight"
+    | "height"
+    | "born"
+    | "targetWeight"
+    | "personalData.userInfo"
+    | "personalData.userPhone"
+    | "personalData.userEmail"
+    | "personalData.userName";
 }
 
 export const Input = ({
@@ -20,6 +28,7 @@ export const Input = ({
   register,
   title,
 }: InputProps) => {
+  console.log(name);
   return (
     <InputContainer>
       <StyledInput

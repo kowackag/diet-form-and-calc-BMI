@@ -2,21 +2,23 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ButtonBox } from "../ButtonBox/ButtonBox";
-import { Button } from "common/components/Button/Button";
-import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
+
 import { Parameters } from "./Parameters";
 import { Activity } from "./Activity";
-import { convertDateToString } from "./helpers";
+import { Button } from "common/components/Button/Button";
+import { ButtonBox } from "common/components/ButtonBox/ButtonBox";
+import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
+
 import { OrderDataContext } from "components/context";
+import { convertDateToString, countBMI } from "./helpers";
 import { firstStageValidateSchema } from "./firstStagevalidationSchema";
-import { countBMI } from "./helpers";
+
 import { DataFirstStageTypes } from "../types";
 
 export const FirstStage = () => {
   const { orderData, dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
-  console.log(orderData?.born);
+
   const {
     register,
     handleSubmit,
@@ -35,7 +37,6 @@ export const FirstStage = () => {
 
   const onClickHandler = handleSubmit((data, event) => {
     event.preventDefault();
-
     if (formIsValid) {
       const bmi = countBMI(data.weight, data.height);
       const copyData = { ...data, bmi };

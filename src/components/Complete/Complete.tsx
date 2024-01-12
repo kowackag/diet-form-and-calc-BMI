@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 import { Button } from "common/components/Button/Button";
-import { ButtonBox } from "../ButtonBox/ButtonBox";
+import { ButtonBox } from "../../common/components/ButtonBox/ButtonBox";
 import { OrderDataContext } from "components/context";
 import { Text } from "common/components/Text/Text.styled";
 

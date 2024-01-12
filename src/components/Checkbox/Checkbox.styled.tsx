@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-const DefaultStyledCheckbox = styled.div`
+export const StyledCheckbox = styled.div<{
+  checked: boolean;
+}>`
   position: relative;
   display: block;
   margin: 2.2rem 0 0.4rem;
@@ -62,7 +64,3 @@ const DefaultStyledCheckbox = styled.div`
     left: 2.5rem;
   }
 `;
-
-const StyledCheckbox = styled(DefaultStyledCheckbox)((props) => props.style);
-
-export default StyledCheckbox;

@@ -5,16 +5,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Radio } from "common/components/Radio/Radio";
 import { Container } from "common/components/Container/Container.styled";
-import { ButtonBox } from "../ButtonBox/ButtonBox";
+import { ButtonBox } from "../../common/components/ButtonBox/ButtonBox";
 import { Button } from "common/components/Button/Button";
 import { Label } from "common/components/Label/Label";
 import { Error } from "common/components/Error/Error";
 import { Search } from "../../common/components/Search/Search";
-import Checkbox from "../Checkbox/Checkbox";
+import { Checkbox } from "components/Checkbox/Checkbox";
 import { Subtitle } from "common/components/Subtitle/Subtitle";
 // import { loadProductsAPI } from "../DataAPI";
 
-import { validateDataThirdStage } from "components/validateData";
 import { OrderDataContext } from "components/context";
 import { DataThirdStageTypes } from "../types";
 
@@ -27,9 +26,12 @@ import { FlexContainer } from "common/components/FlexContainer/FlexContainer.sty
 
 export const ThirdStage = () => {
   const navigate = useNavigate();
+  const {
+    orderData: { diet, lactosy, gluten, excluded1, excluded2 },
+    dispatch,
+  } = useContext(OrderDataContext);
 
-  const { orderData, dispatch } = useContext(OrderDataContext);
-  const { diet, lactosy, gluten, excluded1, excluded2 } = orderData;
+  const [dietType, setDietType] = useState(diet);
 
   // const [products, setProducts] = useState([]);
 
@@ -78,16 +80,6 @@ export const ThirdStage = () => {
       excluded2,
     },
   });
-  console.log(excluded1);
-  const changeValue = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-    e.preventDefault();
-    dispatch({ type: "change", element: e.target as HTMLInputElement });
-  };
-
-  const chooseElement = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    dispatch({ type: "choose", element: e.target });
-  };
 
   const onClickHandler = handleSubmit((data, event) => {
     event.preventDefault();
@@ -135,10 +127,12 @@ export const ThirdStage = () => {
                 key={value}
                 name="diet"
                 value={value}
-                onClick={changeValue}
-                active={diet === value}
+                onClick={() => setDietType(value)}
+                active={dietType === value}
               >
-                <Text weight="bold"> {label}</Text>
+                <Text weight="500" mb="6px">
+                  {label}
+                </Text>
                 <RadioInfo>{desc}</RadioInfo>
               </Radio>
             ))}
@@ -146,14 +140,20 @@ export const ThirdStage = () => {
           </Container>
           <Container width="45%">
             <div className="box">
-              <Label>Dieta bezglutenowa?</Label>
-              <Checkbox name="gluten" onClick={changeValue} />
+              <Text weight="500" size="14px" mt="16px">
+                Dieta bezglutenowa?
+              </Text>
+              <Checkbox register={register} name="gluten" />
             </div>
             <div className="box">
-              <Label>Dieta bez laktozy?</Label>
-              <Checkbox name="lactosy" onClick={changeValue} />
+              <Text weight="500" size="14px" mt="16px">
+                Dieta bez laktozy?
+              </Text>
+              <Checkbox register={register} name="lactosy" />
             </div>
-            <Subtitle>Wykluczenia z diety:</Subtitle>
+            <Text weight="500" mt="26px">
+              Wykluczenia z diety:
+            </Text>
             {searchFields.map(({ name, value, label }) => (
               <React.Fragment key={name}>
                 <Label>{label}</Label>

@@ -33,7 +33,7 @@ const App = () => {
           <Route path={"diet-form-and-calc-BMI/3"} element={<ThirdStage />} />
           <Route path={"diet-form-and-calc-BMI/4"} element={<LastStage />} />
           <Route
-            path={"diet-form-and-calc-BMI/compleate"}
+            path={"diet-form-and-calc-BMI/complete"}
             element={<Complete />}
           />
         </Routes>
