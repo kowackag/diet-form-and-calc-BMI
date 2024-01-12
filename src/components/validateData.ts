@@ -91,15 +91,12 @@ export const validateDataLastStage = ({
   userPhone,
 }: DataLastStageProps) => {
   let errors = {};
-  if (userName.length < 3) {
-    const copyErrors = { userName: "Wpisz poprawnie imię i Nazwisko" };
-    errors = { ...errors, ...copyErrors };
-  }
+  
   if (!userEmail.includes("@")) {
     const copyErrors = { userEmail: "Błędny adres email" };
     errors = { ...errors, ...copyErrors };
   }
-  const regDate = /([1-9]{1}[0-9]{8})/;
+  const regDate = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
   if (!regDate.test(userPhone)) {
     const copyErrors = { userPhone: "Wprowadzono błędny numer telefonu" };
     errors = { ...errors, ...copyErrors };

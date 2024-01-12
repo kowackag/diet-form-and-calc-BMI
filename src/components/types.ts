@@ -1,3 +1,10 @@
+export interface personalDataType {
+  userName: string;
+  userEmail: string;
+  userPhone: string;
+  userInfo?: string;
+}
+
 export type OrderDataTypes = {
   gender: string;
   weight: number;
@@ -12,12 +19,7 @@ export type OrderDataTypes = {
   excluded1: string;
   excluded2: string;
   bmi: number;
-  personalData: {
-    userName: string;
-    userEmail: string;
-    userPhone: string;
-    userInfo: string;
-  };
+  personalData: personalDataType;
 };
 
 export interface DataFirstStageTypes {
@@ -39,4 +41,8 @@ export interface DataThirdStageTypes {
   gluten?: boolean;
   excluded1?: string;
   excluded2?: string;
+}
+
+export interface LastStageTypes {
+  personalData: personalDataType;
 }
