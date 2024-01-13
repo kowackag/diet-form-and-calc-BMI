@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
-export const StyledSearch = styled.div`
+export const StyledSearch = styled.div<{
+  valid: boolean;
+}>`
   font-size: 1.2rem;
   position: relative;
+  border: 2px solid;
+  border-radius: 4px;
+  border-color: ${({ valid }) =>
+    valid ? "transparent" : "rgb(var(--color-error))"};
 `;
 
 export const SearchInput = styled.select`

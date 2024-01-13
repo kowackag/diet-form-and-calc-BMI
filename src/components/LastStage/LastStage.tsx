@@ -13,6 +13,7 @@ import { Error } from "common/components/Error/Error";
 import { OrderDataContext } from "components/context";
 import { lastStageValidateSchema } from "./lastStageValidationSchema";
 import { LastStageTypes } from "components/types";
+import { Container } from "common/components/Container/Container.styled";
 
 interface FieldsTypes {
   label: string;
@@ -93,15 +94,21 @@ const LastStage = () => {
     <div>
       <Subtitle>Proszę o podanie danych kontaktowych.</Subtitle>
       <form>
-        <div>
+        <Container position="relative">
           {fields.map(({ label, name, type, err }) => (
             <React.Fragment key={name}>
               <Label htmlFor={name}>{label}</Label>
-              <Input register={register} type={type} id={name} name={name} />
+              <Input
+                register={register}
+                type={type}
+                id={name}
+                name={name}
+                valid={!Boolean(err)}
+              />
               {errors && <Error err={err} />}
             </React.Fragment>
           ))}
-        </div>
+        </Container>
         <ButtonBox>
           <Button
             onClick={() => navigate("/diet-form-and-calc-BMI/3")}

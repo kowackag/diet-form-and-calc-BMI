@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyledSearch, SearchInput, ListItem } from "./Search.styled";
 
-export const Search = ({ name, value, items, register, isMutable }) => {
+export const Search = ({ name, value, items, register, valid, isMutable }) => {
   const [isActive, setIsActive] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
   const [isOnMouse, setIsOnMouse] = useState(false);
@@ -21,7 +21,7 @@ export const Search = ({ name, value, items, register, isMutable }) => {
   };
 
   return (
-    <StyledSearch>
+    <StyledSearch valid={valid}>
       <SearchInput {...register(name)} name={name} defaultValue="---wybierz---">
         <ListItem disabled value="">
           ---wybierz---

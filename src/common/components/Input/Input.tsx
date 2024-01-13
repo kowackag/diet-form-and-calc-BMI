@@ -9,6 +9,7 @@ interface InputProps {
   type: string;
   unit?: string;
   title?: string;
+  valid: boolean;
   name:
     | "weight"
     | "height"
@@ -27,10 +28,10 @@ export const Input = ({
   name,
   register,
   title,
+  valid,
 }: InputProps) => {
-  console.log(name);
   return (
-    <InputContainer>
+    <InputContainer valid={valid}>
       <StyledInput
         {...register(name)}
         unit={unit}

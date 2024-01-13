@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
+
 import { Input } from "common/components/Input/Input";
 import { Label } from "common/components/Label/Label";
 import { Error } from "common/components/Error/Error";
+import { Container } from "common/components/Container/Container.styled";
 import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
 import { Search } from "common/components/Search/Search";
+
 import { OrderDataContext } from "components/context";
 
 interface FieldsType {
@@ -49,9 +52,10 @@ export const Parameters = ({
 
   return (
     <FlexContainer width="45%" direction="column" alignItems="stretch">
-      <div>
+      <Container position="relative">
         <Label>Płeć</Label>
         <Search
+          valid={!Boolean(genderError)}
           items={["kobieta", "mężczyzna"]}
           name="gender"
           value={gender}
@@ -59,12 +63,13 @@ export const Parameters = ({
           isMutable={false}
         />
         {genderError && <Error err={genderError} />}
-      </div>
+      </Container>
       {fields.map(({ label, type, unit, name, err }) => (
         <React.Fragment key={name}>
-          <div>
+          <Container position="relative">
             <Label htmlFor={name}>{label}</Label>
             <Input
+              valid={!Boolean(err)}
               register={register}
               id={name}
               type={type}
@@ -72,7 +77,7 @@ export const Parameters = ({
               name={name}
             />
             {err && <Error err={err} />}
-          </div>
+          </Container>
         </React.Fragment>
       ))}
     </FlexContainer>

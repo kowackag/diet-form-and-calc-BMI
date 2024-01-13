@@ -7,6 +7,7 @@ import { Error } from "common/components/Error/Error";
 import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
 
 import { Text } from "common/components/Text/Text.styled";
+import { Container } from "common/components/Container/Container.styled";
 
 export const Activity = ({ error, register, activity: active }) => {
   const [activity, setActivity] = useState(active);
@@ -35,23 +36,25 @@ export const Activity = ({ error, register, activity: active }) => {
 
   return (
     <FlexContainer width="45%" direction="column">
-      <Subtitle>Jaka jest twoja aktywność fizyczna?</Subtitle>
-      {fields.map(({ value, label, desc }) => (
-        <Radio
-          register={register}
-          key={value}
-          name="activity"
-          value={value}
-          onClick={() => setActivity(value)}
-          active={value === activity}
-        >
-          <Text weight="500" mb="6px">
-            {label}
-          </Text>
-          <RadioInfo>{desc}</RadioInfo>
-        </Radio>
-      ))}
-      <Error err={error} />
+      <Container position="relative">
+        <Subtitle>Jaka jest twoja aktywność fizyczna?</Subtitle>
+        {fields.map(({ value, label, desc }) => (
+          <Radio
+            register={register}
+            key={value}
+            name="activity"
+            value={value}
+            onClick={() => setActivity(value)}
+            active={value === activity}
+          >
+            <Text weight="500" mb="6px">
+              {label}
+            </Text>
+            <RadioInfo>{desc}</RadioInfo>
+          </Radio>
+        ))}
+        {error && <Error err={error} />}
+      </Container>
     </FlexContainer>
   );
 };

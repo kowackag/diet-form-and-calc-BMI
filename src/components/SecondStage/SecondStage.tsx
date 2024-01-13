@@ -76,6 +76,7 @@ export const SecondStage = () => {
               <>
                 <Label htmlFor="targetWeight">Docelowa masa ciała</Label>
                 <Input
+                  valid={true}
                   register={register}
                   id="targetWeight"
                   type="number"

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const InputContainer = styled.div<{
   unit?: string;
+  valid: boolean;
 }>`
   display: flex;
   border-radius: 4px;
@@ -9,7 +10,8 @@ export const InputContainer = styled.div<{
     inset -4px -4px 6px rgb(var(--color-gamma));
   background-color: rgb(var(--color-alfa));
   font-size: 1.2rem;
-
+  border: 2px solid;
+  border-color: ${({ valid }) => valid ? "transparent" : "rgb(var(--color-error))"};
   input:-webkit-autofill {
     box-shadow: inset 4px 4px 6px rgb(var(--color-beta)),
       inset -10px -10px 36px rgb(var(--color-gamma));
