@@ -37,25 +37,8 @@ export const useHandler = () => {
     switch (action.type) {
       case "reset":
         return init;
-      case "change":
-        const { name, value, checked, title } = action.element;
-        const copyValue = value;
-        const result = title
-          ? { ...state, [name]: { ...state.personalData, [title]: copyValue } }
-          : { ...state, [name]: copyValue };
-        return result;
-      case "select":
-        const copyCheckbox = checked;
-        const checkResult = title
-          ? {
-              ...state,
-              [name]: { ...state.personalData, [title]: copyCheckbox },
-            }
-          : { ...state, [name]: copyValue };
-        return checkResult;
       case "setFirstStageData":
-        const copyData = { ...state, ...action.element };
-        return copyData;
+        return { ...state, ...action.element };
       case "choose":
         if (action.element) {
           let nameLi = action.element.getAttribute("name");

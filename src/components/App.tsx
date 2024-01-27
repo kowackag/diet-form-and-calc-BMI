@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { FirstStage } from "./FirstStage/FirstStage";
@@ -11,13 +11,28 @@ import ProgressBar from "./ProgresBar/ProgressBar";
 
 import { OrderDataContext } from "./context";
 import { useHandler } from "./reducer";
+import { useStorage } from "services/useStorage";
 
 import { Wrapper, Title } from "./App.styled";
 
 const App = () => {
   const [orderData, dispatch] = useHandler();
-  const [stage] = useState(1);
 
+  const [getItem, setItem] = useStorage();
+
+  const stagea = getItem("stage");
+  console.log(getItem("stage"));
+
+  useEffect(() => {
+    setItem("stage", 1);
+  }, []);
+
+  const [stage, setStage] = useState(1);
+
+  useEffect(() => {
+    setItem("orderData", orderData);
+    // setStage(stagea)
+  }, [orderData, getItem("stage")]);
   const getProgress = (stage: number) => {
     const progress = 25 * (stage - 1);
     return progress;

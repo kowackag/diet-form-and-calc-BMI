@@ -12,13 +12,14 @@ import { FlexContainer } from "common/components/FlexContainer/FlexContainer.sty
 import { OrderDataContext } from "components/context";
 import { convertDateToString, countBMI } from "./helpers";
 import { firstStageValidateSchema } from "./firstStagevalidationSchema";
+import { useStorage } from "services/useStorage";
 
 import { DataFirstStageTypes } from "../types";
 
 export const FirstStage = () => {
   const { orderData, dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
-
+  const [, setItem] = useStorage();
   const {
     register,
     handleSubmit,
@@ -41,6 +42,7 @@ export const FirstStage = () => {
       const bmi = countBMI(data.weight, data.height);
       const copyData = { ...data, bmi };
       dispatch({ type: "setFirstStageData", element: copyData });
+      setItem("stage", 2);
       navigate("/diet-form-and-calc-BMI/2");
     }
   });

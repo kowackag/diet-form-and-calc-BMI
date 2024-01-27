@@ -26,15 +26,11 @@ interface FieldsTypes {
   value: string;
   err?: string;
 }
-[];
 
 const LastStage = () => {
-  const {
-    orderData: { personalData },
-    dispatch,
-  } = useContext(OrderDataContext);
+  const { orderData, dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
-
+  const { personalData } = orderData;
   const {
     register,
     handleSubmit,
@@ -56,6 +52,7 @@ const LastStage = () => {
     event.preventDefault();
     if (formIsValid) {
       dispatch({ type: "setFirstStageData", element: { personalData } });
+      console.log({ ...orderData, personalData });
       navigate("/diet-form-and-calc-BMI/complete");
     }
   });
