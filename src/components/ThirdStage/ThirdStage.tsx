@@ -91,6 +91,11 @@ export const ThirdStage = () => {
     }
   });
 
+  const backToPreviousStage = () => {
+    setStage("stage", 2);
+    navigate("/diet-form-and-calc-BMI/2");
+  };
+
   const radioFields = [
     {
       value: "fit",
@@ -173,10 +178,7 @@ export const ThirdStage = () => {
         </FlexContainer>
 
         <ButtonBox>
-          <Button
-            variant="secondary"
-            onClick={() => navigate("/diet-form-and-calc-BMI/2")}
-          >
+          <Button variant="secondary" onClick={backToPreviousStage}>
             Wstecz
           </Button>
           <Button type="submit" onClick={onClickHandler}>

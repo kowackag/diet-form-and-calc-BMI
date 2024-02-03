@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -46,9 +46,13 @@ export const SecondStage = () => {
     if (formIsValid) {
       dispatch({ type: "setFirstStageData", element: data });
       setStage("stage", 3);
-      navigate("/diet-form-and-calc-BMI/3");
     }
   });
+
+  const backToPreviousStage = () => {
+    setStage("stage", 1);
+    navigate("/diet-form-and-calc-BMI/1");
+  };
 
   const fields = [
     { value: "stable", label: "Utrzymanie masy ciała" },
@@ -95,10 +99,7 @@ export const SecondStage = () => {
           {<BMI bmi={orderData.bmi} />}
         </FlexContainer>
         <ButtonBox>
-          <Button
-            variant="secondary"
-            onClick={() => navigate("/diet-form-and-calc-BMI/1")}
-          >
+          <Button variant="secondary" onClick={backToPreviousStage}>
             Wstecz
           </Button>
           <Button type="submit" onClick={onClickHandler}>

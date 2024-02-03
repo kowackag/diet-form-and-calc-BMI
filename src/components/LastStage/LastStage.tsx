@@ -12,6 +12,7 @@ import { Error } from "common/components/Error/Error";
 
 import { OrderDataContext } from "components/context";
 import { lastStageValidateSchema } from "./lastStageValidationSchema";
+import { useLocalStorage } from "services/useLocalStorage";
 import { LastStageTypes } from "components/types";
 import { Container } from "common/components/Container/Container.styled";
 
@@ -30,6 +31,7 @@ interface FieldsTypes {
 const LastStage = () => {
   const { orderData, dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
+  const [, setStage] = useLocalStorage();
   const { personalData } = orderData;
   const {
     register,
@@ -52,10 +54,14 @@ const LastStage = () => {
     event.preventDefault();
     if (formIsValid) {
       dispatch({ type: "setFirstStageData", element: { personalData } });
-      console.log({ ...orderData, personalData });
-      navigate("/diet-form-and-calc-BMI/complete");
+      setStage("stage", 5);
     }
   });
+
+  const backToPreviousStage = () => {
+    setStage("stage", 3);
+    navigate("/diet-form-and-calc-BMI/3");
+  };
 
   const fields: FieldsTypes[] = [
     {
@@ -107,10 +113,7 @@ const LastStage = () => {
           ))}
         </Container>
         <ButtonBox>
-          <Button
-            onClick={() => navigate("/diet-form-and-calc-BMI/3")}
-            type="button"
-          >
+          <Button onClick={backToPreviousStage} type="button">
             Wstecz
           </Button>
           <Button type="submit" onClick={onClickHandler}>
