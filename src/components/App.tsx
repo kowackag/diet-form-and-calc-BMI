@@ -12,31 +12,23 @@ import ProgressBar from "./ProgresBar/ProgressBar";
 import { OrderDataContext } from "./context";
 import { useHandler } from "./reducer";
 import { useStorage } from "services/useStorage";
-
+import { useLocalStorage } from "services/useLocalStorage";
 import { Wrapper, Title } from "./App.styled";
 
-const App = () => {
+const App: React.FC = () => {
   const [orderData, dispatch] = useHandler();
-
-  const [getItem, setItem] = useStorage();
-
-  const stagea = getItem("stage");
-  console.log(getItem("stage"));
+  const [getStage] = useLocalStorage();
+  const [, setOrderLS] = useStorage("order", orderData);
 
   useEffect(() => {
-    setItem("stage", 1);
-  }, []);
+    setOrderLS(orderData);
+  }, [orderData]);
 
-  const [stage, setStage] = useState(1);
-
-  useEffect(() => {
-    setItem("orderData", orderData);
-    // setStage(stagea)
-  }, [orderData, getItem("stage")]);
   const getProgress = (stage: number) => {
     const progress = 25 * (stage - 1);
     return progress;
   };
+  const stage = getStage("stage");
 
   return (
     <OrderDataContext.Provider value={{ orderData, dispatch }}>
@@ -52,7 +44,7 @@ const App = () => {
             element={<Complete />}
           />
         </Routes>
-        <ProgressBar progress={getProgress(stage)}></ProgressBar>
+        <ProgressBar progress={getProgress(Number(stage))}></ProgressBar>
       </Wrapper>
     </OrderDataContext.Provider>
   );

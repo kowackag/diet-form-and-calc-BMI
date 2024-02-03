@@ -4,19 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "common/components/Button/Button";
 import { ButtonBox } from "../../common/components/ButtonBox/ButtonBox";
 import { OrderDataContext } from "components/context";
-import { useStorage } from "services/useStorage";
+import { useLocalStorage } from "services/useLocalStorage";
 
 import { Text } from "common/components/Text/Text.styled";
 
 const Complete = () => {
   const { dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
-  const [, setItem] = useStorage();
+  const [, setStage] = useLocalStorage();
 
   const reset = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     dispatch({ type: "reset" });
-    setItem("stage", 4);
+    setStage("stage", 1);
     navigate("/diet-form-and-calc-BMI/1");
   };
 

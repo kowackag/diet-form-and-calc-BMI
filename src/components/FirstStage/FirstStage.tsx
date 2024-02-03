@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,14 +12,14 @@ import { FlexContainer } from "common/components/FlexContainer/FlexContainer.sty
 import { OrderDataContext } from "components/context";
 import { convertDateToString, countBMI } from "./helpers";
 import { firstStageValidateSchema } from "./firstStagevalidationSchema";
-import { useStorage } from "services/useStorage";
+import { useLocalStorage } from "services/useLocalStorage";
 
 import { DataFirstStageTypes } from "../types";
 
 export const FirstStage = () => {
   const { orderData, dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
-  const [, setItem] = useStorage();
+  const [, setStage] = useLocalStorage();
   const {
     register,
     handleSubmit,
@@ -42,7 +42,7 @@ export const FirstStage = () => {
       const bmi = countBMI(data.weight, data.height);
       const copyData = { ...data, bmi };
       dispatch({ type: "setFirstStageData", element: copyData });
-      setItem("stage", 2);
+      setStage("stage", 2);
       navigate("/diet-form-and-calc-BMI/2");
     }
   });

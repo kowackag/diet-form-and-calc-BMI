@@ -16,7 +16,7 @@ import { ButtonBox } from "common/components/ButtonBox/ButtonBox";
 import BMI from "./BMI/BMI";
 import { OrderDataContext } from "components/context";
 import { secondStageValidationSchema } from "./secondStageValidationSchema";
-import { useStorage } from "services/useStorage";
+import { useLocalStorage } from "services/useLocalStorage";
 
 import { DataSecondStageTypes } from "../types";
 
@@ -25,8 +25,7 @@ import { StyledSecondStage, Form } from "./SecondStage.styled";
 export const SecondStage = () => {
   const { orderData, dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
-  const [, setItem] = useStorage();
-
+  const [, setStage] = useLocalStorage();
   const [radioValue, setRadioValue] = useState(orderData?.goal || "stable");
 
   const {
@@ -46,7 +45,7 @@ export const SecondStage = () => {
     event.preventDefault();
     if (formIsValid) {
       dispatch({ type: "setFirstStageData", element: data });
-      setItem("stage", 3);
+      setStage("stage", 3);
       navigate("/diet-form-and-calc-BMI/3");
     }
   });

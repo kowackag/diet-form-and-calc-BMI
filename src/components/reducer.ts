@@ -24,6 +24,8 @@ export const useHandler = () => {
     },
   };
 
+  const savedOrderInLS = JSON.parse(localStorage.getItem("order"));
+
   type OrderAction = Readonly<
     | { type: "choose"; element: HTMLInputElement }
     | { type: "change"; element: HTMLInputElement }
@@ -52,5 +54,5 @@ export const useHandler = () => {
     }
   };
 
-  return useReducer(reducer, init);
+  return useReducer(reducer, savedOrderInLS || init);
 };

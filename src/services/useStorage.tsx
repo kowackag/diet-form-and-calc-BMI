@@ -1,12 +1,33 @@
-import { OrderDataTypes } from "components/types";
+import { useState, useEffect } from "react";
 
-export const useStorage = () => {
-  const setItem = (name: string, data?: Partial<OrderDataTypes> | number) => {
-    localStorage.setItem(name, JSON.stringify(data));
-  };
-  const getItem = (name: string) => {
-    const retrivedObject = JSON.parse(localStorage.getItem(name));
-    return retrivedObject;
-  };
-  return [getItem, setItem];
+type StorageType<T> = [
+  T | undefined,
+  React.Dispatch<React.SetStateAction<T | undefined>>
+];
+
+export const useStorage = <T,>(
+  name: string,
+  initialValue?: T
+): StorageType<T> => {
+  const [state, setState] = useState<T | undefined>(() => {
+    if (!initialValue) return;
+    try {
+      const value = localStorage.getItem(name);
+      return value ? JSON.parse(value) : initialValue;
+    } catch (err) {
+      return initialValue;
+    }
+  });
+
+  useEffect(() => {
+    if (state) {
+      try {
+        localStorage.setItem(name, JSON.stringify(state));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, [state, name]);
+
+  return [state, setState];
 };

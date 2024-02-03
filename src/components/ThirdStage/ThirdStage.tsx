@@ -19,19 +19,21 @@ import { StyledThirdStage, Form } from "./ThirdStage.styled";
 
 import { OrderDataContext } from "components/context";
 import { thirdStageValidateSchema } from "./thirdStageValidationSchema";
-import { useStorage } from "services/useStorage";
+import { useLocalStorage } from "services/useLocalStorage";
 
 import { DataThirdStageTypes } from "../types";
 
 export const ThirdStage = () => {
-  const navigate = useNavigate();
   const {
     orderData: { diet, lactosy, gluten, excluded1, excluded2 },
     dispatch,
   } = useContext(OrderDataContext);
+  const navigate = useNavigate();
+  const [, setStage] = useLocalStorage();
 
   const [dietType, setDietType] = useState(diet);
-  const [, setItem] = useStorage();
+  // const [st, setItem] = useStorage("stage", 3);
+  // console.log(st);
   // const [products, setProducts] = useState([]);
 
   // useEffect(() => {
@@ -84,7 +86,7 @@ export const ThirdStage = () => {
     event.preventDefault();
     if (formIsValid) {
       dispatch({ type: "setFirstStageData", element: data });
-      setItem("stage", 4);
+      setStage("stage", 4);
       navigate("/diet-form-and-calc-BMI/4");
     }
   });
