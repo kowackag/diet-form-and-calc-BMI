@@ -12,7 +12,9 @@ import { Error } from "common/components/Error/Error";
 
 import { OrderDataContext } from "components/context";
 import { lastStageValidateSchema } from "./lastStageValidationSchema";
+import { useLocalStorage } from "services/useLocalStorage";
 import { LastStageTypes } from "components/types";
+import { Container } from "common/components/Container/Container.styled";
 
 interface FieldsTypes {
   label: string;
@@ -25,15 +27,12 @@ interface FieldsTypes {
   value: string;
   err?: string;
 }
-[];
 
 const LastStage = () => {
-  const {
-    orderData: { personalData },
-    dispatch,
-  } = useContext(OrderDataContext);
+  const { orderData, dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
-
+  const [, setStage] = useLocalStorage();
+  const { personalData } = orderData;
   const {
     register,
     handleSubmit,
@@ -55,9 +54,14 @@ const LastStage = () => {
     event.preventDefault();
     if (formIsValid) {
       dispatch({ type: "setFirstStageData", element: { personalData } });
-      navigate("/diet-form-and-calc-BMI/complete");
+      setStage("stage", 5);
     }
   });
+
+  const backToPreviousStage = () => {
+    setStage("stage", 3);
+    navigate("/diet-form-and-calc-BMI/3");
+  };
 
   const fields: FieldsTypes[] = [
     {
@@ -93,20 +97,23 @@ const LastStage = () => {
     <div>
       <Subtitle>Proszę o podanie danych kontaktowych.</Subtitle>
       <form>
-        <div>
+        <Container position="relative">
           {fields.map(({ label, name, type, err }) => (
             <React.Fragment key={name}>
               <Label htmlFor={name}>{label}</Label>
-              <Input register={register} type={type} id={name} name={name} />
+              <Input
+                register={register}
+                type={type}
+                id={name}
+                name={name}
+                valid={!Boolean(err)}
+              />
               {errors && <Error err={err} />}
             </React.Fragment>
           ))}
-        </div>
+        </Container>
         <ButtonBox>
-          <Button
-            onClick={() => navigate("/diet-form-and-calc-BMI/3")}
-            type="button"
-          >
+          <Button onClick={backToPreviousStage} type="button">
             Wstecz
           </Button>
           <Button type="submit" onClick={onClickHandler}>

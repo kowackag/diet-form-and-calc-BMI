@@ -6,6 +6,7 @@ interface GlobalProps {
   colorShadowLight: string;
   colorFont: string;
   colorContrast: string;
+  colorError: string;
 }
 
 const GlobalStyle = createGlobalStyle<{
@@ -17,6 +18,7 @@ const GlobalStyle = createGlobalStyle<{
       --color-gamma: ${(props) => props.theme.colorShadowLight};
       --color-font: ${(props) => props.theme.colorFont};
       --color-contrast:${(props) => props.theme.colorContrast};
+      --color-error:${(props) => props.theme.colorError};
     }
 
     html {

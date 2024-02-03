@@ -1,38 +1,39 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { Radio } from "common/components/Radio/Radio";
 import { Container } from "common/components/Container/Container.styled";
-import { ButtonBox } from "../../common/components/ButtonBox/ButtonBox";
+import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
+import { ButtonBox } from "common/components/ButtonBox/ButtonBox";
 import { Button } from "common/components/Button/Button";
 import { Label } from "common/components/Label/Label";
 import { Error } from "common/components/Error/Error";
-import { Search } from "../../common/components/Search/Search";
+import { Search } from "common/components/Search/Search";
 import { Checkbox } from "components/Checkbox/Checkbox";
-import { Subtitle } from "common/components/Subtitle/Subtitle";
+import { Radio } from "common/components/Radio/Radio";
+import { RadioInfo } from "common/components/Radio/Radio.styled";
+import { Text } from "common/components/Text/Text.styled";
+import { StyledThirdStage, Form } from "./ThirdStage.styled";
 // import { loadProductsAPI } from "../DataAPI";
 
 import { OrderDataContext } from "components/context";
+import { thirdStageValidateSchema } from "./thirdStageValidationSchema";
+import { useLocalStorage } from "services/useLocalStorage";
+
 import { DataThirdStageTypes } from "../types";
 
-import { StyledThirdStage, Form } from "./ThirdStage.styled";
-
-import { RadioInfo } from "common/components/Radio/Radio.styled";
-import { Text } from "common/components/Text/Text.styled";
-import { thirdStageValidateSchema } from "./thirdStageValidationSchema";
-import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
-
 export const ThirdStage = () => {
-  const navigate = useNavigate();
   const {
     orderData: { diet, lactosy, gluten, excluded1, excluded2 },
     dispatch,
   } = useContext(OrderDataContext);
+  const navigate = useNavigate();
+  const [, setStage] = useLocalStorage();
 
   const [dietType, setDietType] = useState(diet);
-
+  // const [st, setItem] = useStorage("stage", 3);
+  // console.log(st);
   // const [products, setProducts] = useState([]);
 
   // useEffect(() => {
@@ -85,9 +86,15 @@ export const ThirdStage = () => {
     event.preventDefault();
     if (formIsValid) {
       dispatch({ type: "setFirstStageData", element: data });
+      setStage("stage", 4);
       navigate("/diet-form-and-calc-BMI/4");
     }
   });
+
+  const backToPreviousStage = () => {
+    setStage("stage", 2);
+    navigate("/diet-form-and-calc-BMI/2");
+  };
 
   const radioFields = [
     {
@@ -120,7 +127,7 @@ export const ThirdStage = () => {
     <StyledThirdStage>
       <Form>
         <FlexContainer>
-          <Container width="45%">
+          <Container width="45%" position="relative">
             {radioFields.map(({ value, label, desc }) => (
               <Radio
                 register={register}
@@ -158,6 +165,7 @@ export const ThirdStage = () => {
               <React.Fragment key={name}>
                 <Label>{label}</Label>
                 <Search
+                  valid={true}
                   register={register}
                   items={products}
                   name={name}
@@ -170,10 +178,7 @@ export const ThirdStage = () => {
         </FlexContainer>
 
         <ButtonBox>
-          <Button
-            variant="secondary"
-            onClick={() => navigate("/diet-form-and-calc-BMI/2")}
-          >
+          <Button variant="secondary" onClick={backToPreviousStage}>
             Wstecz
           </Button>
           <Button type="submit" onClick={onClickHandler}>

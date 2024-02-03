@@ -8,6 +8,8 @@ export default {
       colorShadowLight: "251, 253, 255",
       colorFont: "15, 10, 150",
       colorContrast: "216, 27, 110",
+      // colorContrast: "77, 90, 229",
+      colorError: "235, 9, 9",
     },
   },
 };

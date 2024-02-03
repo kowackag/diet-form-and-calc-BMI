@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -16,6 +16,8 @@ import { ButtonBox } from "common/components/ButtonBox/ButtonBox";
 import BMI from "./BMI/BMI";
 import { OrderDataContext } from "components/context";
 import { secondStageValidationSchema } from "./secondStageValidationSchema";
+import { useLocalStorage } from "services/useLocalStorage";
+
 import { DataSecondStageTypes } from "../types";
 
 import { StyledSecondStage, Form } from "./SecondStage.styled";
@@ -23,7 +25,7 @@ import { StyledSecondStage, Form } from "./SecondStage.styled";
 export const SecondStage = () => {
   const { orderData, dispatch } = useContext(OrderDataContext);
   const navigate = useNavigate();
-
+  const [, setStage] = useLocalStorage();
   const [radioValue, setRadioValue] = useState(orderData?.goal || "stable");
 
   const {
@@ -43,9 +45,14 @@ export const SecondStage = () => {
     event.preventDefault();
     if (formIsValid) {
       dispatch({ type: "setFirstStageData", element: data });
-      navigate("/diet-form-and-calc-BMI/3");
+      setStage("stage", 3);
     }
   });
+
+  const backToPreviousStage = () => {
+    setStage("stage", 1);
+    navigate("/diet-form-and-calc-BMI/1");
+  };
 
   const fields = [
     { value: "stable", label: "Utrzymanie masy ciała" },
@@ -76,6 +83,7 @@ export const SecondStage = () => {
               <>
                 <Label htmlFor="targetWeight">Docelowa masa ciała</Label>
                 <Input
+                  valid={true}
                   register={register}
                   id="targetWeight"
                   type="number"
@@ -88,13 +96,10 @@ export const SecondStage = () => {
               </>
             )}
           </Container>
-          <BMI bmi={orderData.bmi} />
+          {<BMI bmi={orderData.bmi} />}
         </FlexContainer>
         <ButtonBox>
-          <Button
-            variant="secondary"
-            onClick={() => navigate("/diet-form-and-calc-BMI/1")}
-          >
+          <Button variant="secondary" onClick={backToPreviousStage}>
             Wstecz
           </Button>
           <Button type="submit" onClick={onClickHandler}>
