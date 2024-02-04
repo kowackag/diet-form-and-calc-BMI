@@ -1,5 +1,5 @@
 {
-  "homepage": "https://kowackag.github.com/diet-form-and-calc-BMI/",
+  "homepage": "https://kowackag.github.io/diet-form-and-calc-BMI/",
   "name": "diet-form-and-calc-bmi",
   "version": "1.0.0",
   "private": true,
@@ -10,6 +10,10 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kowackag/diet-form-and-calc-BMI.git"
   },
   "keywords": [],
   "author": "",
