@@ -1,10 +1,9 @@
-export interface personalDataTypes {
+export type personalDataTypes = {
   userName?: string;
   userEmail?: string;
   userPhone?: string;
   userInfo?: string;
 }
-
 export type OrderDataTypes = {
   gender: string;
   weight: number;

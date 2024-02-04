@@ -1,4 +1,4 @@
-import { OrderDataTypes } from "components/types";
+import { OrderDataTypes } from "common/types";
 
 type LSTypes = number | OrderDataTypes;
 

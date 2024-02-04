@@ -1,8 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { BmiBox } from "./BmiBox/BmiBox";
 import { Button } from "common/components/Button/Button";
 import { Input } from "common/components/Input/Input";
 import { Label } from "common/components/Label/Label";
@@ -12,15 +13,12 @@ import { Container } from "common/components/Container/Container.styled";
 import { Subtitle } from "common/components/Subtitle/Subtitle";
 import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
 import { ButtonBox } from "common/components/ButtonBox/ButtonBox";
-
-import BMI from "./BMI/BMI";
-import { OrderDataContext } from "components/context";
-import { secondStageValidationSchema } from "./secondStageValidationSchema";
-import { useLocalStorage } from "services/useLocalStorage";
-
-import { DataSecondStageTypes } from "../types";
-
 import { StyledSecondStage, Form } from "./SecondStage.styled";
+
+import { secondStageValidationSchema } from "./secondStageValidationSchema";
+import { OrderDataContext } from "store/context";
+import { useLocalStorage } from "common/hook/useLocalStorage";
+import { DataSecondStageTypes } from "common/types";
 
 export const SecondStage = () => {
   const { orderData, dispatch } = useContext(OrderDataContext);
@@ -96,7 +94,7 @@ export const SecondStage = () => {
               </>
             )}
           </Container>
-          {<BMI bmi={orderData.bmi} />}
+          {<BmiBox bmi={orderData.bmi} />}
         </FlexContainer>
         <ButtonBox>
           <Button variant="secondary" onClick={backToPreviousStage}>

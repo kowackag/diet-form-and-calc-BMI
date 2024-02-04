@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "common/components/Button/Button";
-import { ButtonBox } from "../../common/components/ButtonBox/ButtonBox";
-import { OrderDataContext } from "components/context";
-import { useLocalStorage } from "services/useLocalStorage";
-
+import { ButtonBox } from "common/components/ButtonBox/ButtonBox";
 import { Text } from "common/components/Text/Text.styled";
+
+import { OrderDataContext } from "store/context";
+import { useLocalStorage } from "common/hook/useLocalStorage";
 
 const Complete = () => {
   const { dispatch } = useContext(OrderDataContext);

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyledInput, Unit, InputContainer } from "./Input.styled";
 import { UseFormRegister } from "react-hook-form";
-import { OrderDataTypes } from "components/types";
+import { OrderDataTypes } from "common/types";
 
 interface InputProps {
   register: UseFormRegister<Partial<OrderDataTypes>>;

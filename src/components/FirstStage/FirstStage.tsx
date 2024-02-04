@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,12 +9,11 @@ import { Button } from "common/components/Button/Button";
 import { ButtonBox } from "common/components/ButtonBox/ButtonBox";
 import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
 
-import { OrderDataContext } from "components/context";
 import { convertDateToString, countBMI } from "./helpers";
 import { firstStageValidateSchema } from "./firstStagevalidationSchema";
-import { useLocalStorage } from "services/useLocalStorage";
-
-import { DataFirstStageTypes } from "../types";
+import { OrderDataContext } from "store/context";
+import { useLocalStorage } from "common/hook/useLocalStorage";
+import { DataFirstStageTypes } from "common/types";
 
 export const FirstStage = () => {
   const { orderData, dispatch } = useContext(OrderDataContext);

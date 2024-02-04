@@ -17,11 +17,10 @@ import { Text } from "common/components/Text/Text.styled";
 import { StyledThirdStage, Form } from "./ThirdStage.styled";
 // import { loadProductsAPI } from "../DataAPI";
 
-import { OrderDataContext } from "components/context";
 import { thirdStageValidateSchema } from "./thirdStageValidationSchema";
-import { useLocalStorage } from "services/useLocalStorage";
-
-import { DataThirdStageTypes } from "../types";
+import { OrderDataContext } from "store/context";
+import { useLocalStorage } from "common/hook/useLocalStorage";
+import { DataThirdStageTypes } from "common/types";
 
 export const ThirdStage = () => {
   const {

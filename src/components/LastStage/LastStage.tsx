@@ -1,20 +1,20 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Subtitle } from "common/components/Subtitle/Subtitle";
 import { ButtonBox } from "common/components/ButtonBox/ButtonBox";
+import { Container } from "common/components/Container/Container.styled";
 import { Button } from "common/components/Button/Button";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "common/components/Input/Input";
 import { Label } from "common/components/Label/Label";
 import { Error } from "common/components/Error/Error";
 
-import { OrderDataContext } from "components/context";
 import { lastStageValidateSchema } from "./lastStageValidationSchema";
-import { useLocalStorage } from "services/useLocalStorage";
-import { LastStageTypes } from "components/types";
-import { Container } from "common/components/Container/Container.styled";
+import { OrderDataContext } from "store/context";
+import { useLocalStorage } from "common/hook/useLocalStorage";
+import { LastStageTypes } from "common/types";
 
 interface FieldsTypes {
   label: string;
@@ -106,7 +106,7 @@ const LastStage = () => {
                 type={type}
                 id={name}
                 name={name}
-                valid={!Boolean(err)}
+                valid={!err}
               />
               {errors && <Error err={err} />}
             </React.Fragment>
