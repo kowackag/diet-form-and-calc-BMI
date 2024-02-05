@@ -3,7 +3,7 @@ export type personalDataTypes = {
   userEmail?: string;
   userPhone?: string;
   userInfo?: string;
-}
+};
 export type OrderDataTypes = {
   gender: string;
   weight: number;

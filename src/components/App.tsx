@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 
 import { FirstStage } from "./FirstStage/FirstStage";
@@ -28,6 +28,7 @@ const App: React.FC = () => {
     const progress = 25 * (stage - 1);
     return progress;
   };
+
   const stage = getStage("stage");
 
   useEffect(() => {
@@ -37,8 +38,15 @@ const App: React.FC = () => {
     navigate(`/diet-form-and-calc-BMI/${stage}`);
   }, [stage]);
 
+  const getOrderData = useMemo(() => {
+    return {
+      orderData,
+      dispatch,
+    };
+  }, [orderData, dispatch]);
+
   return (
-    <OrderDataContext.Provider value={{ orderData, dispatch }}>
+    <OrderDataContext.Provider value={getOrderData}>
       <Wrapper>
         <Title>Konfigurator diety</Title>
         <Routes>

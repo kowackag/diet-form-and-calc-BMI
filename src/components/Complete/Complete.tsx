@@ -22,7 +22,7 @@ const Complete = () => {
 
   return (
     <div>
-      <p>Formularz został poprawnie wysłany. </p>
+      <Text mt="3rem">Formularz został poprawnie wysłany. </Text>
       <Text
         mt="6rem"
         mb="6rem"

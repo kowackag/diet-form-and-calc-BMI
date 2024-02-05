@@ -33,12 +33,14 @@ const GlobalStyle = createGlobalStyle<{
       line-height:1.15;
     }
 
-    #root {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
+    #root {     
+      min-height: 100%;
+      
+      @media (min-width: 768px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
-
 `;
 export default GlobalStyle;

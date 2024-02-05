@@ -49,7 +49,7 @@ export const FirstStage = () => {
   return (
     <div>
       <form>
-        <FlexContainer>
+        <FlexContainer direction="column" gap="30px">
           <Parameters
             register={register}
             genderError={errors.gender?.message}

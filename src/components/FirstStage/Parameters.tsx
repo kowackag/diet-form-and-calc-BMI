@@ -51,7 +51,7 @@ export const Parameters = ({
   ];
 
   return (
-    <FlexContainer width="45%" direction="column" alignItems="stretch">
+    <Container>
       <Container position="relative">
         <Label>Płeć</Label>
         <Search
@@ -80,7 +80,7 @@ export const Parameters = ({
           </Container>
         </React.Fragment>
       ))}
-    </FlexContainer>
+    </Container>
   );
 };
 
