@@ -125,8 +125,8 @@ export const ThirdStage = () => {
   return (
     <StyledThirdStage>
       <Form>
-        <FlexContainer>
-          <Container width="45%" position="relative">
+        <FlexContainer direction="column" gap="30px">
+          <Container position="relative">
             {radioFields.map(({ value, label, desc }) => (
               <Radio
                 register={register}
@@ -144,7 +144,7 @@ export const ThirdStage = () => {
             ))}
             {errors?.diet && <Error err={errors.diet?.message} />}
           </Container>
-          <Container width="45%">
+          <Container>
             <div className="box">
               <Text weight="500" size="14px" mt="16px">
                 Dieta bezglutenowa?

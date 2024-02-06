@@ -13,7 +13,7 @@ import { Container } from "common/components/Container/Container.styled";
 import { Subtitle } from "common/components/Subtitle/Subtitle";
 import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
 import { ButtonBox } from "common/components/ButtonBox/ButtonBox";
-import { StyledSecondStage, Form } from "./SecondStage.styled";
+import { StyledSecondStage } from "./SecondStage.styled";
 
 import { secondStageValidationSchema } from "./secondStageValidationSchema";
 import { OrderDataContext } from "store/context";
@@ -60,9 +60,9 @@ export const SecondStage = () => {
 
   return (
     <StyledSecondStage>
-      <Form>
-        <FlexContainer>
-          <Container width="45%">
+      <form>
+        <FlexContainer direction="column" gap="30px">
+          <Container>
             <Subtitle>Cel diety:</Subtitle>
             {fields.map(({ value, label }) => (
               <Radio
@@ -104,7 +104,7 @@ export const SecondStage = () => {
             Dalej
           </Button>
         </ButtonBox>
-      </Form>
+      </form>
     </StyledSecondStage>
   );
 };

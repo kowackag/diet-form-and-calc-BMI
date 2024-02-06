@@ -11,7 +11,7 @@ export const FlexContainer = styled.div<{
   display: flex;
   flex-direction: ${({ direction }) => direction || "row"};
   justify-content: ${({ jc }) => jc || "space-between"};
-  align-items: ${({ alignItems }) => alignItems || "center"};
+  align-items: ${({ alignItems }) => alignItems};
   position: ${({ position }) => position};
   width: ${({ width }) => width || "100%"};
   gap: ${({ gap }) => gap};

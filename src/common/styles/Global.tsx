@@ -29,12 +29,12 @@ const GlobalStyle = createGlobalStyle<{
     body {
       height: 100%;
       font-family: "Roboto", Verdana, sans-serif;
-      font-size: 1.6rem;
-      line-height:1.15;
     }
 
     #root {     
       min-height: 100%;
+      font-size: 1.6rem;
+      line-height:1.15;
       
       @media (min-width: 768px) {
         display: flex;

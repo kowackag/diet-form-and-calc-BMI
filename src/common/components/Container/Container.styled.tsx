@@ -6,4 +6,8 @@ export const Container = styled.div<{
 }>`
   width: ${({ width }) => width || "100%"};
   position: ${({ position }) => position};
+
+  /* @media screen {
+    width: 50%;
+  } */
 `;
