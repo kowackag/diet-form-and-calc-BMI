@@ -8,15 +8,14 @@ export const StyledCheckbox = styled.div<{
   margin: 2.2rem 0 0.4rem;
   min-width: 5rem;
   height: 2rem;
-  background: rgb(var(--color-gamma));
-
+  background: var(--color-gamma);
   border-radius: 2rem;
-  box-shadow: inset 2px 2px 3px rgb(var(--color-beta)),
-    inset -2px -2px 3px rgb(var(--color-gamma));
+  box-shadow: inset 2px 2px 3px var(--color-beta),
+    inset -2px -2px 3px var(--color-gamma);
 
   &::after {
     content: "TAK";
-    color: rgba(var(--color-contrast), 0.7);
+    color: var(--color-contrast);
     position: absolute;
     padding-right: 2px;
     right: 2px;
@@ -29,7 +28,7 @@ export const StyledCheckbox = styled.div<{
 
   &::before {
     content: "NIE";
-    color: rgba(var(--color-font), 0.7);
+    color: var(--color-font-light);
     position: absolute;
     padding-left: 2px;
     left: 2px;
@@ -49,12 +48,11 @@ export const StyledCheckbox = styled.div<{
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
-    background: rgb(var(--color-alfa));
+    background: var(--color-alfa);
     border-radius: 50px;
     transition: all 0.4s ease;
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
-    box-shadow: 2px 2px 3px rgb(var(--color-beta)),
-      -2px -2px 3px rgb(var(--color-beta));
+    box-shadow: 2px 2px 3px var(--color-beta), -2px -2px 3px var(--color-beta);
   }
 
   & input[type="checkbox"] {

@@ -5,6 +5,7 @@ interface GlobalProps {
   colorShadowDark: string;
   colorShadowLight: string;
   colorFont: string;
+  colorFontLight: string;
   colorContrast: string;
   colorError: string;
 }
@@ -17,6 +18,7 @@ const GlobalStyle = createGlobalStyle<{
       --color-beta: ${(props) => props.theme.colorShadowDark};
       --color-gamma: ${(props) => props.theme.colorShadowLight};
       --color-font: ${(props) => props.theme.colorFont};
+      --color-font-light: ${(props) => props.theme.colorFontLight};
       --color-contrast:${(props) => props.theme.colorContrast};
       --color-error:${(props) => props.theme.colorError};
     }
@@ -35,7 +37,7 @@ const GlobalStyle = createGlobalStyle<{
       min-height: 100%;
       font-size: 1.6rem;
       line-height:1.15;
-      
+
       @media (min-width: 768px) {
         display: flex;
         justify-content: center;

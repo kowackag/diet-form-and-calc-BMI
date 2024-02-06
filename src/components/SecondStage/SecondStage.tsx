@@ -13,7 +13,6 @@ import { Container } from "common/components/Container/Container.styled";
 import { Subtitle } from "common/components/Subtitle/Subtitle";
 import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
 import { ButtonBox } from "common/components/ButtonBox/ButtonBox";
-import { StyledSecondStage } from "./SecondStage.styled";
 
 import { secondStageValidationSchema } from "./secondStageValidationSchema";
 import { OrderDataContext } from "store/context";
@@ -59,52 +58,50 @@ export const SecondStage = () => {
   ];
 
   return (
-    <StyledSecondStage>
-      <form>
-        <FlexContainer direction="column" gap="30px">
-          <Container>
-            <Subtitle>Cel diety:</Subtitle>
-            {fields.map(({ value, label }) => (
-              <Radio
+    <form>
+      <FlexContainer direction="column" gap="30px">
+        <Container>
+          <Subtitle>Cel diety:</Subtitle>
+          {fields.map(({ value, label }) => (
+            <Radio
+              register={register}
+              key={value}
+              name="goal"
+              value={value}
+              active={radioValue === value}
+              onClick={() => setRadioValue(value)}
+            >
+              <p>{label}</p>
+            </Radio>
+          ))}
+          {errors.goal && <Error err={errors.goal?.message} />}
+          {radioValue !== "stable" && (
+            <>
+              <Label htmlFor="targetWeight">Docelowa masa ciała</Label>
+              <Input
+                valid={true}
                 register={register}
-                key={value}
-                name="goal"
-                value={value}
-                active={radioValue === value}
-                onClick={() => setRadioValue(value)}
-              >
-                <p>{label}</p>
-              </Radio>
-            ))}
-            {errors.goal && <Error err={errors.goal?.message} />}
-            {radioValue !== "stable" && (
-              <>
-                <Label htmlFor="targetWeight">Docelowa masa ciała</Label>
-                <Input
-                  valid={true}
-                  register={register}
-                  id="targetWeight"
-                  type="number"
-                  unit="kg"
-                  name="targetWeight"
-                />
-                {errors?.targetWeight && (
-                  <Error err={errors.targetWeight?.message} />
-                )}
-              </>
-            )}
-          </Container>
-          {<BmiBox bmi={orderData.bmi} />}
-        </FlexContainer>
-        <ButtonBox>
-          <Button variant="secondary" onClick={backToPreviousStage}>
-            Wstecz
-          </Button>
-          <Button type="submit" onClick={onClickHandler}>
-            Dalej
-          </Button>
-        </ButtonBox>
-      </form>
-    </StyledSecondStage>
+                id="targetWeight"
+                type="number"
+                unit="kg"
+                name="targetWeight"
+              />
+              {errors?.targetWeight && (
+                <Error err={errors.targetWeight?.message} />
+              )}
+            </>
+          )}
+        </Container>
+        {<BmiBox bmi={orderData.bmi} />}
+      </FlexContainer>
+      <ButtonBox>
+        <Button variant="secondary" onClick={backToPreviousStage}>
+          Wstecz
+        </Button>
+        <Button type="submit" onClick={onClickHandler}>
+          Dalej
+        </Button>
+      </ButtonBox>
+    </form>
   );
 };

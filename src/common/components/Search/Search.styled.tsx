@@ -8,7 +8,7 @@ export const StyledSearch = styled.div<{
   border: 2px solid;
   border-radius: 4px;
   border-color: ${({ valid }) =>
-    valid ? "transparent" : "rgb(var(--color-error))"};
+    valid ? "transparent" : "var(--color-error)"};
 `;
 
 export const SearchInput = styled.select`
@@ -20,13 +20,12 @@ export const SearchInput = styled.select`
   outline: none;
   border: none;
   background-color: transparent;
-  color: rgb(var(--color-font));
-  color: rgba(var(--color-font), 0.8);
+  color: var(--color-font-light);
   font-size: 1.4rem;
   border-radius: 4px;
-  box-shadow: inset 4px 4px 6px rgb(var(--color-beta)),
-    inset -4px -4px 6px rgb(var(--color-gamma));
-  background-color: rgb(var(--color-alfa));
+  box-shadow: inset 4px 4px 6px var(--color-beta),
+    inset -4px -4px 6px var(--color-gamma);
+  background-color: var(--color-alfa);
   cursor: context-menu;
 `;
 
@@ -47,7 +46,7 @@ export const ListItem = styled.option<{
 }>`
   display: inline-block;
   padding: 2rem;
-  border-bottom: 1px solid rgb(var(--color-beta));
+  border-bottom: 1px solid var(--color-beta);
   cursor: pointer;
 `;
 
@@ -60,7 +59,7 @@ export const List = styled.ul<{
   list-style: none;
   width: 100%;
   z-index: 3;
-  background-color: rgb(var(--color-alfa));
-  box-shadow: 3px 3px 3px rgb(var(--color-beta)),
-    inset -3px -3px 3px rgb(var(--color-gamma));
+  background-color: var(--color-alfa);
+  box-shadow: 3px 3px 3px var(--color-beta),
+    inset -3px -3px 3px var(--color-gamma);
 `;

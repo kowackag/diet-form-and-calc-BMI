@@ -47,28 +47,26 @@ export const FirstStage = () => {
   });
 
   return (
-    <div>
-      <form>
-        <FlexContainer direction="column" gap="30px">
-          <Parameters
-            register={register}
-            genderError={errors.gender?.message}
-            weightError={errors.weight?.message}
-            heightError={errors.height?.message}
-            bornError={errors.born?.message}
-          />
-          <Activity
-            register={register}
-            error={errors.activity?.message}
-            activity={orderData.activity}
-          />
-        </FlexContainer>
-        <ButtonBox>
-          <Button type="submit" onClick={onClickHandler}>
-            Dalej
-          </Button>
-        </ButtonBox>
-      </form>
-    </div>
+    <form>
+      <FlexContainer direction="column" gap="30px">
+        <Parameters
+          register={register}
+          genderError={errors.gender?.message}
+          weightError={errors.weight?.message}
+          heightError={errors.height?.message}
+          bornError={errors.born?.message}
+        />
+        <Activity
+          register={register}
+          error={errors.activity?.message}
+          activity={orderData.activity}
+        />
+      </FlexContainer>
+      <ButtonBox>
+        <Button type="submit" onClick={onClickHandler}>
+          Dalej
+        </Button>
+      </ButtonBox>
+    </form>
   );
 };

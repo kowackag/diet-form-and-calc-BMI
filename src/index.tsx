@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <BrowserRouter>
-    <ThemeProvider theme={themeSettings.variant.light}>
+    <ThemeProvider theme={themeSettings.colors.light}>
       <ResetStyle />
       <GlobalStyle />
       <App />

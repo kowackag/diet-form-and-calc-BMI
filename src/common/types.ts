@@ -1,4 +1,4 @@
-export type personalDataTypes = {
+export type PersonalDataTypes = {
   userName?: string;
   userEmail?: string;
   userPhone?: string;
@@ -18,7 +18,7 @@ export type OrderDataTypes = {
   excluded1: string;
   excluded2: string;
   bmi: number;
-  personalData: personalDataTypes;
+  personalData: PersonalDataTypes;
 };
 
 export interface DataFirstStageTypes {
@@ -43,5 +43,5 @@ export interface DataThirdStageTypes {
 }
 
 export interface LastStageTypes {
-  personalData: personalDataTypes;
+  personalData: PersonalDataTypes;
 }

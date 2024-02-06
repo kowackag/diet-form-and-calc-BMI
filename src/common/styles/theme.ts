@@ -1,15 +1,16 @@
 export default {
-  variant: {
+  colors: {
     light: {
-      colorBody: "238, 245, 252",
-      colorBgc: "250, 250, 250",
+      colorBody: "rgb(238, 245, 252)",
+      colorBgc: "rgb(250, 250, 250)",
       colorPrimary: "#1266F1",
-      colorShadowDark: "215 224 234",
-      colorShadowLight: "251, 253, 255",
-      colorFont: "15, 10, 150",
-      colorContrast: "216, 27, 110",
+      colorShadowDark: "rgb(215 224 234)",
+      colorShadowLight: "rgb(251, 253, 255)",
+      colorFont: "rgb(15, 10, 150)",
+      colorFontLight: "rgba(15, 10, 150, 0.8)",
+      colorContrast: "rgb(216, 27, 110)",
       // colorContrast: "77, 90, 229",
-      colorError: "235, 9, 9",
+      colorError: "rgb(235, 9, 9)",
     },
   },
 };

@@ -14,7 +14,7 @@ import { Checkbox } from "components/Checkbox/Checkbox";
 import { Radio } from "common/components/Radio/Radio";
 import { RadioInfo } from "common/components/Radio/Radio.styled";
 import { Text } from "common/components/Text/Text.styled";
-import { StyledThirdStage, Form } from "./ThirdStage.styled";
+import { Box } from "./ThirdStage.styled";
 // import { loadProductsAPI } from "../DataAPI";
 
 import { thirdStageValidateSchema } from "./thirdStageValidationSchema";
@@ -123,68 +123,66 @@ export const ThirdStage = () => {
   ];
 
   return (
-    <StyledThirdStage>
-      <Form>
-        <FlexContainer direction="column" gap="30px">
-          <Container position="relative">
-            {radioFields.map(({ value, label, desc }) => (
-              <Radio
-                register={register}
-                key={value}
-                name="diet"
-                value={value}
-                onClick={() => setDietType(value)}
-                active={dietType === value}
-              >
-                <Text weight="500" mb="6px">
-                  {label}
-                </Text>
-                <RadioInfo>{desc}</RadioInfo>
-              </Radio>
-            ))}
-            {errors?.diet && <Error err={errors.diet?.message} />}
-          </Container>
-          <Container>
-            <div className="box">
-              <Text weight="500" size="14px" mt="16px">
-                Dieta bezglutenowa?
+    <form>
+      <FlexContainer direction="column" gap="30px">
+        <Container position="relative">
+          {radioFields.map(({ value, label, desc }) => (
+            <Radio
+              register={register}
+              key={value}
+              name="diet"
+              value={value}
+              onClick={() => setDietType(value)}
+              active={dietType === value}
+            >
+              <Text weight="500" mb="6px">
+                {label}
               </Text>
-              <Checkbox register={register} name="gluten" />
-            </div>
-            <div className="box">
-              <Text weight="500" size="14px" mt="16px">
-                Dieta bez laktozy?
-              </Text>
-              <Checkbox register={register} name="lactosy" />
-            </div>
-            <Text weight="500" mt="26px">
-              Wykluczenia z diety:
+              <RadioInfo>{desc}</RadioInfo>
+            </Radio>
+          ))}
+          {errors?.diet && <Error err={errors.diet?.message} />}
+        </Container>
+        <Container>
+          <Box>
+            <Text weight="500" size="14px" mt="16px">
+              Dieta bezglutenowa?
             </Text>
-            {searchFields.map(({ name, value, label }) => (
-              <React.Fragment key={name}>
-                <Label>{label}</Label>
-                <Search
-                  valid={true}
-                  register={register}
-                  items={products}
-                  name={name}
-                  value={value}
-                  isMutable={true}
-                />
-              </React.Fragment>
-            ))}
-          </Container>
-        </FlexContainer>
+            <Checkbox register={register} name="gluten" />
+          </Box>
+          <Box>
+            <Text weight="500" size="14px" mt="16px">
+              Dieta bez laktozy?
+            </Text>
+            <Checkbox register={register} name="lactosy" />
+          </Box>
+          <Text weight="500" mt="26px">
+            Wykluczenia z diety:
+          </Text>
+          {searchFields.map(({ name, value, label }) => (
+            <React.Fragment key={name}>
+              <Label>{label}</Label>
+              <Search
+                valid={true}
+                register={register}
+                items={products}
+                name={name}
+                value={value}
+                isMutable={true}
+              />
+            </React.Fragment>
+          ))}
+        </Container>
+      </FlexContainer>
 
-        <ButtonBox>
-          <Button variant="secondary" onClick={backToPreviousStage}>
-            Wstecz
-          </Button>
-          <Button type="submit" onClick={onClickHandler}>
-            Dalej
-          </Button>
-        </ButtonBox>
-      </Form>
-    </StyledThirdStage>
+      <ButtonBox>
+        <Button variant="secondary" onClick={backToPreviousStage}>
+          Wstecz
+        </Button>
+        <Button type="submit" onClick={onClickHandler}>
+          Dalej
+        </Button>
+      </ButtonBox>
+    </form>
   );
 };

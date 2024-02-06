@@ -21,12 +21,12 @@ const Complete = () => {
   };
 
   return (
-    <div>
+    <>
       <Text mt="3rem">Formularz został poprawnie wysłany. </Text>
       <Text
         mt="6rem"
         mb="6rem"
-        color="rgb(var(--color-contrast))"
+        color="var(--color-contrast)"
         fontStyle="italic"
       >
         Dziękujemy za skorzystanie z naszej oferty
@@ -34,7 +34,7 @@ const Complete = () => {
       <ButtonBox>
         <Button onClick={reset}>Uzupełnij ponownie</Button>
       </ButtonBox>
-    </div>
+    </>
   );
 };
 
