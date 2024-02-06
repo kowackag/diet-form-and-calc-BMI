@@ -9,15 +9,12 @@ export const StyledButton = styled.button<{
   margin: 2rem;
   border: none;
   border-radius: 4px;
-  box-shadow: 6px 6px 10px rgb(var(--color-beta)),
-    -4px -4px 6px rgb(var(--color-gamma));
+  box-shadow: 6px 6px 10px var(--color-beta), -4px -4px 6px var(--color-gamma);
   background-color: ${({ variant }) =>
-    variant === "secondary" ? "rgb(var(--color-alfa))" : "rgb(77 90 229)"};
+    variant === "secondary" ? "var(--color-alfa)" : "rgb(77 90 229)"};
 
   color: ${({ variant }) =>
-    variant === "secondary"
-      ? "rgb(var(--color-font))"
-      : "rgb(var(--color-alfa))"};
+    variant === "secondary" ? "var(--color-font)" : "var(--color-alfa)"};
   font-size: 1.4rem;
   font-weight: 500;
   text-align: center;
@@ -27,7 +24,7 @@ export const StyledButton = styled.button<{
   &:hover,
   &:focus {
     outline: none;
-    color: rgb(var(--color-alfa));
+    color: var(--color-alfa);
     background-color: rgb(50, 62, 191);
     cursor: pointer;
   }

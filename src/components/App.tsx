@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 
 import { FirstStage } from "./FirstStage/FirstStage";
@@ -7,12 +7,11 @@ import { ThirdStage } from "./ThirdStage/ThirdStage";
 import LastStage from "./LastStage/LastStage";
 import Complete from "./Complete/Complete";
 import ProgressBar from "./ProgresBar/ProgressBar";
-//import { addOrdersAPI } from "./DataAPI";
 
-import { OrderDataContext } from "./context";
-import { useHandler } from "./reducer";
-import { useStorage } from "services/useStorage";
-import { useLocalStorage } from "services/useLocalStorage";
+import { OrderDataContext } from "store/context";
+import { useHandler } from "store/reducer";
+import { useStorage } from "common/hook/useStorage";
+import { useLocalStorage } from "common/hook/useLocalStorage";
 import { Wrapper, Title } from "./App.styled";
 
 const App: React.FC = () => {
@@ -20,7 +19,7 @@ const App: React.FC = () => {
   const [getStage] = useLocalStorage();
   const [, setOrderLS] = useStorage("order", orderData);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     setOrderLS(orderData);
   }, [orderData]);
@@ -29,6 +28,7 @@ const App: React.FC = () => {
     const progress = 25 * (stage - 1);
     return progress;
   };
+
   const stage = getStage("stage");
 
   useEffect(() => {
@@ -38,11 +38,17 @@ const App: React.FC = () => {
     navigate(`/diet-form-and-calc-BMI/${stage}`);
   }, [stage]);
 
+  const getOrderData = useMemo(() => {
+    return {
+      orderData,
+      dispatch,
+    };
+  }, [orderData, dispatch]);
+
   return (
-    <OrderDataContext.Provider value={{ orderData, dispatch }}>
+    <OrderDataContext.Provider value={getOrderData}>
       <Wrapper>
         <Title>Konfigurator diety</Title>
-        {/* <Navigate to={`/diet-form-and-calc-BMI/${stage}`} /> */}
         <Routes>
           <Route element={<Navigate to="diet-form-and-calc-BMI/1" />} />
           <Route path={"diet-form-and-calc-BMI/1"} element={<FirstStage />} />
@@ -50,6 +56,7 @@ const App: React.FC = () => {
           <Route path={"diet-form-and-calc-BMI/3"} element={<ThirdStage />} />
           <Route path={"diet-form-and-calc-BMI/4"} element={<LastStage />} />
           <Route path={"diet-form-and-calc-BMI/5"} element={<Complete />} />
+          <Route path={"diet-form-and-calc-BMI/*"} element={<FirstStage />} />
         </Routes>
         <ProgressBar progress={getProgress(Number(stage))}></ProgressBar>
       </Wrapper>

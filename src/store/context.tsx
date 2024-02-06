@@ -1,5 +1,5 @@
 import React from "react";
-import { OrderDataTypes } from "./types";
+import { OrderDataTypes } from "../common/types";
 
 type OrderAction =
   | { type: "choose"; element: HTMLInputElement }
@@ -18,7 +18,7 @@ export const initOrderData = {
   gender: "",
   weight: 0,
   height: 0,
-  born: new Date('2000-01-01'),
+  born: new Date("2000-01-01"),
   activity: "",
   goal: "",
   targetWeight: 0,

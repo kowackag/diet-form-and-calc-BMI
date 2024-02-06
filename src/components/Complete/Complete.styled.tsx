@@ -6,6 +6,6 @@ export const StyledComplete = styled.div`
   & .thanks {
     margin: 6rem 0 6rem;
     font-style: italic;
-    color: rgb(var(--color-contrast));
+    color: var(--color-contrast);
   }
 `;

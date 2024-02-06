@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { OrderDataTypes } from "./types";
+import { OrderDataTypes } from "../common/types";
 
 export const useHandler = () => {
   const init = {

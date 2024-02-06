@@ -1,8 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { BmiBox } from "./BmiBox/BmiBox";
 import { Button } from "common/components/Button/Button";
 import { Input } from "common/components/Input/Input";
 import { Label } from "common/components/Label/Label";
@@ -13,14 +14,10 @@ import { Subtitle } from "common/components/Subtitle/Subtitle";
 import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
 import { ButtonBox } from "common/components/ButtonBox/ButtonBox";
 
-import BMI from "./BMI/BMI";
-import { OrderDataContext } from "components/context";
 import { secondStageValidationSchema } from "./secondStageValidationSchema";
-import { useLocalStorage } from "services/useLocalStorage";
-
-import { DataSecondStageTypes } from "../types";
-
-import { StyledSecondStage, Form } from "./SecondStage.styled";
+import { OrderDataContext } from "store/context";
+import { useLocalStorage } from "common/hook/useLocalStorage";
+import { DataSecondStageTypes } from "common/types";
 
 export const SecondStage = () => {
   const { orderData, dispatch } = useContext(OrderDataContext);
@@ -61,52 +58,50 @@ export const SecondStage = () => {
   ];
 
   return (
-    <StyledSecondStage>
-      <Form>
-        <FlexContainer>
-          <Container width="45%">
-            <Subtitle>Cel diety:</Subtitle>
-            {fields.map(({ value, label }) => (
-              <Radio
+    <form>
+      <FlexContainer direction="column" gap="30px">
+        <Container>
+          <Subtitle>Cel diety:</Subtitle>
+          {fields.map(({ value, label }) => (
+            <Radio
+              register={register}
+              key={value}
+              name="goal"
+              value={value}
+              active={radioValue === value}
+              onClick={() => setRadioValue(value)}
+            >
+              <p>{label}</p>
+            </Radio>
+          ))}
+          {errors.goal && <Error err={errors.goal?.message} />}
+          {radioValue !== "stable" && (
+            <>
+              <Label htmlFor="targetWeight">Docelowa masa ciała</Label>
+              <Input
+                valid={true}
                 register={register}
-                key={value}
-                name="goal"
-                value={value}
-                active={radioValue === value}
-                onClick={() => setRadioValue(value)}
-              >
-                <p>{label}</p>
-              </Radio>
-            ))}
-            {errors.goal && <Error err={errors.goal?.message} />}
-            {radioValue !== "stable" && (
-              <>
-                <Label htmlFor="targetWeight">Docelowa masa ciała</Label>
-                <Input
-                  valid={true}
-                  register={register}
-                  id="targetWeight"
-                  type="number"
-                  unit="kg"
-                  name="targetWeight"
-                />
-                {errors?.targetWeight && (
-                  <Error err={errors.targetWeight?.message} />
-                )}
-              </>
-            )}
-          </Container>
-          {<BMI bmi={orderData.bmi} />}
-        </FlexContainer>
-        <ButtonBox>
-          <Button variant="secondary" onClick={backToPreviousStage}>
-            Wstecz
-          </Button>
-          <Button type="submit" onClick={onClickHandler}>
-            Dalej
-          </Button>
-        </ButtonBox>
-      </Form>
-    </StyledSecondStage>
+                id="targetWeight"
+                type="number"
+                unit="kg"
+                name="targetWeight"
+              />
+              {errors?.targetWeight && (
+                <Error err={errors.targetWeight?.message} />
+              )}
+            </>
+          )}
+        </Container>
+        {<BmiBox bmi={orderData.bmi} />}
+      </FlexContainer>
+      <ButtonBox>
+        <Button variant="secondary" onClick={backToPreviousStage}>
+          Wstecz
+        </Button>
+        <Button type="submit" onClick={onClickHandler}>
+          Dalej
+        </Button>
+      </ButtonBox>
+    </form>
   );
 };

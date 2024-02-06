@@ -7,7 +7,7 @@ import { Container } from "common/components/Container/Container.styled";
 import { FlexContainer } from "common/components/FlexContainer/FlexContainer.styled";
 import { Search } from "common/components/Search/Search";
 
-import { OrderDataContext } from "components/context";
+import { OrderDataContext } from "store/context";
 
 interface FieldsType {
   label: string;
@@ -51,11 +51,11 @@ export const Parameters = ({
   ];
 
   return (
-    <FlexContainer width="45%" direction="column" alignItems="stretch">
+    <Container>
       <Container position="relative">
         <Label>Płeć</Label>
         <Search
-          valid={!Boolean(genderError)}
+          valid={!genderError}
           items={["kobieta", "mężczyzna"]}
           name="gender"
           value={gender}
@@ -69,7 +69,7 @@ export const Parameters = ({
           <Container position="relative">
             <Label htmlFor={name}>{label}</Label>
             <Input
-              valid={!Boolean(err)}
+              valid={!err}
               register={register}
               id={name}
               type={type}
@@ -80,7 +80,7 @@ export const Parameters = ({
           </Container>
         </React.Fragment>
       ))}
-    </FlexContainer>
+    </Container>
   );
 };
 

@@ -1,4 +1,4 @@
-import { OrderDataTypes } from "./types";
+import { OrderDataTypes } from "../common/types";
 
 const url = "http://localhost:3000";
 

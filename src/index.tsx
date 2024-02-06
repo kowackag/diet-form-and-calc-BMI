@@ -4,15 +4,15 @@ import { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
 import App from "./components/App";
 
-import themeSettings from "./styled/theme";
-import ResetStyle from "./styled/Reset";
-import GlobalStyle from "./styled/Global";
+import themeSettings from "./common/styles/theme";
+import ResetStyle from "./common/styles/Reset";
+import GlobalStyle from "./common/styles/Global";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <BrowserRouter>
-    <ThemeProvider theme={themeSettings.variant.light}>
+    <ThemeProvider theme={themeSettings.colors.light}>
       <ResetStyle />
       <GlobalStyle />
       <App />

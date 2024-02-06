@@ -35,7 +35,7 @@ export const Activity = ({ error, register, activity: active }) => {
   ];
 
   return (
-    <FlexContainer width="45%" direction="column">
+    <FlexContainer direction="column">
       <Container position="relative">
         <Subtitle>Jaka jest twoja aktywność fizyczna?</Subtitle>
         {fields.map(({ value, label, desc }) => (
